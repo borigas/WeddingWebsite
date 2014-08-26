@@ -12,15 +12,12 @@ using WeddingWebsite.Models;
 
 namespace WeddingWebsite.Controllers
 {
-    public class RsvpController : Controller
+    public class RsvpController : BaseController
     {
-        private WeddingWebsiteContext db = new WeddingWebsiteContext();
-
-        // GET: Rsvp
         [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
-            return View(db.Rsvps.ToList());
+            return View(Db.Rsvps.ToList());
         }
 
         // GET: Rsvp/Details/5
@@ -30,7 +27,7 @@ namespace WeddingWebsite.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rsvp rsvp = db.Rsvps.Find(id);
+            Rsvp rsvp = Db.Rsvps.Find(id);
             if (rsvp == null)
             {
                 return HttpNotFound();
@@ -54,8 +51,8 @@ namespace WeddingWebsite.Controllers
             if (ModelState.IsValid)
             {
                 // Save the inital state of the rsvp
-                db.Rsvps.Add(rsvp);
-                db.SaveChanges();
+                Db.Rsvps.Add(rsvp);
+                Db.SaveChanges();
 
                 // Create a dummy user for this rsvp
                 string userName = rsvp.Email;
@@ -64,20 +61,19 @@ namespace WeddingWebsite.Controllers
                     userName = rsvp.Name.Replace(" ", "");
                 }
 
-                var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var user = new ApplicationUser()
                 {
                     Email = rsvp.Email,
                     UserName = userName,
                 };
-                userManager.Create(user);
-                userManager.AddToRole(user.Id, "user");
+                UserManager.Create(user);
+                UserManager.AddToRole(user.Id, "user");
 
                 // Save the user id to the rsvp
                 rsvp.UserId = user.Id;
 
-                db.Entry(rsvp).State = EntityState.Modified;
-                db.SaveChanges();
+                Db.Entry(rsvp).State = EntityState.Modified;
+                Db.SaveChanges();
 
                 // If not an admin, sign them into the new account
                 if (!User.IsInRole("admin"))
@@ -99,7 +95,7 @@ namespace WeddingWebsite.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rsvp rsvp = db.Rsvps.Find(id);
+            Rsvp rsvp = Db.Rsvps.Find(id);
             if (rsvp == null)
             {
                 return HttpNotFound();
@@ -116,8 +112,8 @@ namespace WeddingWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(rsvp).State = EntityState.Modified;
-                db.SaveChanges();
+                Db.Entry(rsvp).State = EntityState.Modified;
+                Db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(rsvp);
@@ -130,7 +126,7 @@ namespace WeddingWebsite.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rsvp rsvp = db.Rsvps.Find(id);
+            Rsvp rsvp = Db.Rsvps.Find(id);
             if (rsvp == null)
             {
                 return HttpNotFound();
@@ -143,19 +139,10 @@ namespace WeddingWebsite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Rsvp rsvp = db.Rsvps.Find(id);
-            db.Rsvps.Remove(rsvp);
-            db.SaveChanges();
+            Rsvp rsvp = Db.Rsvps.Find(id);
+            Db.Rsvps.Remove(rsvp);
+            Db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

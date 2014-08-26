@@ -13,10 +13,8 @@ using WeddingWebsite.Models;
 namespace WeddingWebsite.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
-        private ApplicationUserManager _userManager;
-
         public AccountController()
         {
         }
@@ -27,18 +25,6 @@ namespace WeddingWebsite.Controllers
             SignInManager = signInManager;
         }
 
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -46,17 +32,6 @@ namespace WeddingWebsite.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
-        }
-
-        private ApplicationSignInManager _signInManager;
-
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set { _signInManager = value; }
         }
 
         //

@@ -11,7 +11,7 @@ using WeddingWebsite.Models;
 namespace WeddingWebsite.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         public ManageController()
         {
@@ -20,19 +20,6 @@ namespace WeddingWebsite.Controllers
         public ManageController(ApplicationUserManager userManager)
         {
             UserManager = userManager;
-        }
-
-        private ApplicationUserManager _userManager;
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
         }
 
         //
@@ -311,7 +298,7 @@ namespace WeddingWebsite.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -368,6 +355,6 @@ namespace WeddingWebsite.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
