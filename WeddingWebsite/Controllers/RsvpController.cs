@@ -15,6 +15,7 @@ namespace WeddingWebsite.Controllers
         private WeddingWebsiteContext db = new WeddingWebsiteContext();
 
         // GET: Rsvp
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             return View(db.Rsvps.ToList());
