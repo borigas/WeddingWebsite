@@ -77,7 +77,7 @@ namespace WeddingWebsite.Controllers
                     signInManager.SignIn(user, isPersistent: true, rememberBrowser: false);
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Detail", new { id = rsvp.Id });
             }
 
             return View(rsvp);
