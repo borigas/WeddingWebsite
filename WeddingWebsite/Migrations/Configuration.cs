@@ -42,6 +42,7 @@ namespace WeddingWebsite.Migrations
                     {
                         UserName = email,
                         Email = email,
+                        Name = "Seed Admin",
                     };
                     userManager.Create(user, "changeme");
 

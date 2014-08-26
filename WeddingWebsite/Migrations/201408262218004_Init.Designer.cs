@@ -13,7 +13,7 @@ namespace WeddingWebsite.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201408261943486_Init"; }
+            get { return "201408262218004_Init"; }
         }
         
         string IMigrationMetadata.Source

@@ -71,6 +71,7 @@ namespace WeddingWebsite.Controllers
                 {
                     Email = rsvp.Email,
                     UserName = userName,
+                    Name = rsvp.Name,
                 };
                 UserManager.Create(user);
                 UserManager.AddToRole(user.Id, "user");
