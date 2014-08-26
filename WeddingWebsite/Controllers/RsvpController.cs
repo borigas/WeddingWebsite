@@ -15,10 +15,21 @@ namespace WeddingWebsite.Controllers
     [Authorize] // Don't allow anonymous access to anything but create
     public class RsvpController : BaseController
     {
-        [Authorize(Roles = "admin")]
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            return View(Db.Rsvps.ToList());
+            if (User.IsInRole("admin"))
+            {
+                return View(Db.Rsvps.ToList());
+            }
+            else if (Request.IsAuthenticated)
+            {
+                string userId = User.Identity.GetUserId();
+                var rsvp = Db.Rsvps.FirstOrDefault(r => r.UserId == userId);
+                return RedirectToAction("Details", new { id = rsvp.Id });
+            }
+
+            return RedirectToAction("Create");
         }
 
         // GET: Rsvp/Details/5
@@ -77,7 +88,7 @@ namespace WeddingWebsite.Controllers
                     signInManager.SignIn(user, isPersistent: true, rememberBrowser: false);
                 }
 
-                return RedirectToAction("Detail", new { id = rsvp.Id });
+                return RedirectToAction("Index");
             }
 
             return View(rsvp);
@@ -105,8 +116,14 @@ namespace WeddingWebsite.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                Db.Entry(rsvp).State = EntityState.Modified;
+
+                rsvpFromDb.Name = rsvp.Name;
+                rsvpFromDb.Attending = rsvp.Attending;
+                rsvpFromDb.TotalAdults = rsvp.TotalAdults;
+                rsvpFromDb.TotalChildren = rsvp.TotalChildren;
+
                 Db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(rsvp);
