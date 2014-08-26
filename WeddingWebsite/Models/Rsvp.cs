@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace WeddingWebsite.Models
 {
@@ -11,11 +12,16 @@ namespace WeddingWebsite.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [HiddenInput]
+        public string UserId { get; set; }
+
+        //[Required]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
+        [MinLength(4, ErrorMessage = "Please provide your full name")]
+        [DisplayName("Full Name")]
         public string Name { get; set; }
 
         [Required]

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 using WeddingWebsite.Models;
 
 namespace WeddingWebsite.Controllers
@@ -47,12 +49,43 @@ namespace WeddingWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,Name,Attending,TotalAdults,TotalChildren")] Rsvp rsvp)
+        public ActionResult Create(Rsvp rsvp)
         {
             if (ModelState.IsValid)
             {
+                // Save the inital state of the rsvp
                 db.Rsvps.Add(rsvp);
                 db.SaveChanges();
+
+                // Create a dummy user for this rsvp
+                string userName = rsvp.Email;
+                if (string.IsNullOrWhiteSpace(userName))
+                {
+                    userName = rsvp.Name.Replace(" ", "");
+                }
+
+                var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var user = new ApplicationUser()
+                {
+                    Email = rsvp.Email,
+                    UserName = userName,
+                };
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "user");
+
+                // Save the user id to the rsvp
+                rsvp.UserId = user.Id;
+
+                db.Entry(rsvp).State = EntityState.Modified;
+                db.SaveChanges();
+
+                // If not an admin, sign them into the new account
+                if (!User.IsInRole("admin"))
+                {
+                    var signInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                    signInManager.SignIn(user, isPersistent: true, rememberBrowser: false);
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -79,7 +112,7 @@ namespace WeddingWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,Name,Attending,TotalAdults,TotalChildren")] Rsvp rsvp)
+        public ActionResult Edit(Rsvp rsvp)
         {
             if (ModelState.IsValid)
             {
