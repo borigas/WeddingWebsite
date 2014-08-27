@@ -60,38 +60,50 @@ namespace WeddingWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Save the inital state of the rsvp
+                try
+                {
+                    ApplicationUser user = null;
+                    if (Request.IsAuthenticated)
+                    {
+                        rsvp.UserId = User.Identity.GetUserId();
+                    }
+                    else
+                    {
+                        // Check if this account exists already
+                        string userName = rsvp.Email;
+                        if (string.IsNullOrWhiteSpace(userName))
+                        {
+                            userName = rsvp.Name.Replace(" ", "");
+                        }
+                        user = UserManager.FindByName(userName);
+                        if (user == null)
+                        {
+                            // Create a dummy user for this rsvp
+
+                            user = new ApplicationUser()
+                            {
+                                Email = rsvp.Email,
+                                UserName = userName,
+                                Name = rsvp.Name,
+                            };
+                            UserManager.Create(user);
+                            UserManager.AddToRole(user.Id, "user");
+                        }
+
+                        // If not an admin, sign them into the account
+                        var signInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                        signInManager.SignIn(user, isPersistent: true, rememberBrowser: false);
+
+                        // Assign RSPV.UserId
+                        // Save the user id to the rsvp
+                        rsvp.UserId = user.Id;
+                    }
+                }
+                catch (Exception) { }
+
+                // Save the rsvp
                 Db.Rsvps.Add(rsvp);
                 Db.SaveChanges();
-
-                // Create a dummy user for this rsvp
-                string userName = rsvp.Email;
-                if (string.IsNullOrWhiteSpace(userName))
-                {
-                    userName = rsvp.Name.Replace(" ", "");
-                }
-
-                var user = new ApplicationUser()
-                {
-                    Email = rsvp.Email,
-                    UserName = userName,
-                    Name = rsvp.Name,
-                };
-                UserManager.Create(user);
-                UserManager.AddToRole(user.Id, "user");
-
-                // Save the user id to the rsvp
-                rsvp.UserId = user.Id;
-
-                Db.Entry(rsvp).State = EntityState.Modified;
-                Db.SaveChanges();
-
-                // If not an admin, sign them into the new account
-                if (!User.IsInRole("admin"))
-                {
-                    var signInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-                    signInManager.SignIn(user, isPersistent: true, rememberBrowser: false);
-                }
 
                 return RedirectToAction("Index");
             }
