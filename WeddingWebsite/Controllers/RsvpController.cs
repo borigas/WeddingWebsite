@@ -18,15 +18,19 @@ namespace WeddingWebsite.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            if (User.IsInRole("admin"))
+            if (Request.IsAuthenticated)
             {
-                return View(Db.Rsvps.ToList());
-            }
-            else if (Request.IsAuthenticated)
-            {
-                string userId = User.Identity.GetUserId();
-                var rsvp = Db.Rsvps.FirstOrDefault(r => r.UserId == userId);
-                return RedirectToAction("Details", new { id = rsvp.Id });
+                List<Rsvp> rsvps;
+                if (User.IsInRole("admin"))
+                {
+                    rsvps = Db.Rsvps.ToList();
+                }
+                else
+                {
+                    string userId = User.Identity.GetUserId();
+                    rsvps = Db.Rsvps.Where(r => r.UserId == userId).ToList();
+                }
+                return View(rsvps);
             }
 
             return RedirectToAction("Create");
