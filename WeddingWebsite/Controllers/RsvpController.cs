@@ -71,32 +71,40 @@ namespace WeddingWebsite.Controllers
                     {
                         // Check if this account exists already
                         string userName = rsvp.Email;
+                        string email = rsvp.Email;
                         if (string.IsNullOrWhiteSpace(userName))
                         {
                             userName = rsvp.Name.Replace(" ", "");
+                            email = userName + "@DontHaveEmail.com";
                         }
                         user = UserManager.FindByName(userName);
                         if (user == null)
                         {
                             // Create a dummy user for this rsvp
-
-                            user = new ApplicationUser()
+                            ApplicationUser newUser = new ApplicationUser()
                             {
-                                Email = rsvp.Email,
+                                Email = email,
                                 UserName = userName,
                                 Name = rsvp.Name,
                             };
-                            UserManager.Create(user);
-                            UserManager.AddToRole(user.Id, "user");
+                            IdentityResult result = UserManager.Create(newUser);
+                            if (result.Succeeded)
+                            {
+                                UserManager.AddToRole(newUser.Id, "user");
+                                user = newUser;
+                            }
                         }
 
-                        // If not an admin, sign them into the account
-                        var signInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-                        signInManager.SignIn(user, isPersistent: true, rememberBrowser: false);
+                        if (user != null)
+                        {
+                            // If not an admin, sign them into the account
+                            var signInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                            signInManager.SignIn(user, isPersistent: true, rememberBrowser: false);
 
-                        // Assign RSPV.UserId
-                        // Save the user id to the rsvp
-                        rsvp.UserId = user.Id;
+                            // Assign RSVP.UserId
+                            // Save the user id to the rsvp
+                            rsvp.UserId = user.Id;
+                        }
                     }
                 }
                 catch (Exception) { }
