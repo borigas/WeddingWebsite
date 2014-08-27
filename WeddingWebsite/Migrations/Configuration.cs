@@ -18,7 +18,7 @@ namespace WeddingWebsite.Migrations
         // Based on example from http://www.typecastexception.com/post/2013/10/27/Configuring-Db-Connection-and-Code-First-Migration-for-Identity-Accounts-in-ASPNET-MVC-5-and-Visual-Studio-2013.aspx#Seeding-the-Database-with-an-Initial-User-Records
         protected override void Seed(WeddingWebsite.Models.ApplicationDbContext context)
         {
-            string[] adminEmails = new string[] { "changeme@gmail.com" };
+            string[] adminEmails = new string[] { "borigas@gmail.com" };
             string[] roles = new string[] { "admin", "user" };
 
             var roleManager = new RoleManager<IdentityRole>(
