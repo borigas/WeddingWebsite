@@ -123,102 +123,21 @@
         </div>
     </div>
 
-    <!-- Arrow Navigator Skin Begin -->
-    <style>
-        /* jssor slider arrow navigator skin 05 css */
-        /*
-            .jssora05l              (normal)
-            .jssora05r              (normal)
-            .jssora05l:hover        (normal mouseover)
-            .jssora05r:hover        (normal mouseover)
-            .jssora05ldn            (mousedown)
-            .jssora05rdn            (mousedown)
-            */
-        .jssora05l, .jssora05r, .jssora05ldn, .jssora05rdn {
-            position: absolute;
-            cursor: pointer;
-            display: block;
-            background: url(http://www.jssor.com/img/a17.png) no-repeat;
-            overflow: hidden;
-        }
+    @*
+        <!-- Nav arrow skin #5 -->
+        <span data-u="arrowleft" class="jssora05l" style="width: 40px; height: 40px; top: 158px; left: 8px;"></span>
+        <span data-u="arrowright" class="jssora05r" style="width: 40px; height: 40px; top: 158px; right: 8px"></span>
+        <!-- End arrow skin #5 -->
+    *@
 
-        .jssora05l {
-            background-position: -10px -40px;
-        }
+    <!-- Nav arrow skin #14 -->
+    <span data-u="arrowleft" class="jssora14l" style="width: 30px; height: 50px; top: 123px; left: 0px;"></span>
+    <span data-u="arrowright" class="jssora14r" style="width: 30px; height: 50px; top: 123px; right: 0px"></span>
+    <!-- End arrow skin #14 -->
 
-        .jssora05r {
-            background-position: -70px -40px;
-        }
-
-        .jssora05l:hover {
-            background-position: -130px -40px;
-        }
-
-        .jssora05r:hover {
-            background-position: -190px -40px;
-        }
-
-        .jssora05ldn {
-            background-position: -250px -40px;
-        }
-
-        .jssora05rdn {
-            background-position: -310px -40px;
-        }
-    </style>
-    <!-- Arrow Left -->
-    <span data-u="arrowleft" class="jssora05l" style="width: 40px; height: 40px; top: 158px; left: 8px;">
-    </span>
-    <!-- Arrow Right -->
-    <span data-u="arrowright" class="jssora05r" style="width: 40px; height: 40px; top: 158px; right: 8px">
-    </span>
-    <!-- Arrow Navigator Skin End -->
     <!-- Thumbnail Navigator Skin Begin -->
     <div data-u="thumbnavigator" class="jssort01" style="position: absolute; width: 800px; height: 100px; left:0px; bottom: 0px;">
         <!-- Thumbnail Item Skin Begin -->
-        <style>
-            /* jssor slider thumbnail navigator skin 01 css */
-            /*
-                .jssort01 .p           (normal)
-                .jssort01 .p:hover     (normal mouseover)
-                .jssort01 .pav           (active)
-                .jssort01 .pav:hover     (active mouseover)
-                .jssort01 .pdn           (mousedown)
-                */
-            .jssort01 .w {
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                width: 100%;
-                height: 100%;
-            }
-
-            .jssort01 .c {
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                width: 68px;
-                height: 68px;
-                border: #000 2px solid;
-            }
-
-            .jssort01 .p:hover .c, .jssort01 .pav:hover .c, .jssort01 .pav .c {
-                background: url(http://www.jssor.com/img/t01.png) center center;
-                border-width: 0px;
-                top: 2px;
-                left: 2px;
-                width: 68px;
-                height: 68px;
-            }
-
-            .jssort01 .p:hover .c, .jssort01 .pav:hover .c {
-                top: 0px;
-                left: 0px;
-                width: 70px;
-                height: 70px;
-                border: #fff 1px solid;
-            }
-        </style>
         <div data-u="slides" style="cursor: move;">
             <div data-u="prototype" class="p" style="position: absolute; width: 72px; height: 72px; top: 0; left: 0;">
                 <div class=w><thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate></div>
@@ -228,8 +147,6 @@
         </div>
         <!-- Thumbnail Item Skin End -->
     </div>
-    <!-- Thumbnail Navigator Skin End -->
-    <a style="display: none" href="http://www.jssor.com">javascript</a>
 </div>
 <!-- Jssor Slider End -->
 </div>
