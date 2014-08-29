@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@section scripts{
+<script src="https://rawgit.com/jssor/jquery-slider/master/js/jssor.core.js"></script>
+<script src="https://rawgit.com/jssor/jquery-slider/master/js/jssor.utils.js"></script>
+    <script src="https://rawgit.com/jssor/jquery-slider/master/js/jssor.slider.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            var options = { $AutoPlay: true };
+            var jssor_slider1 = new $JssorSlider$('slider1_container', options);
+        });
+    </script>
+}
+
+<div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 600px; height: 300px;">
+    <!-- Slides Container -->
+    <div data-u="slides" style="position: absolute; overflow: hidden; left: 0px; top: 0px; width: 600px; height: 300px;">
+        <div><img data-u="image" src="http://www.jssor.com/img/alila/10.jpg" /></div>
+        <div><img data-u="image" src="http://www.jssor.com/img/alila/11.jpg" /></div>
+        <div><img data-u="image" src="http://www.jssor.com/img/alila/12.jpg" /></div>
+        <div><img data-u="image" src="http://www.jssor.com/img/alila/13.jpg" /></div>
+        <div><img data-u="image" src="http://www.jssor.com/img/alila/14.jpg" /></div>
+    </div>
+</div>
