@@ -83,6 +83,8 @@
                     $ChanceToShow: 1                               //[Required] 0 Never, 1 Mouse Over, 2 Always
                 },
 
+                // Options for Navigator #1
+                /*
                 $ThumbnailNavigatorOptions: {                       //[Optional] Options to specify and enable thumbnail navigator or not
                     $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
                     $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
@@ -91,6 +93,49 @@
                     $SpacingX: 8,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
                     $DisplayPieces: 10,                             //[Optional] Number of pieces to display, default value is 1
                     $ParkingPosition: 360                          //[Optional] The offset position to park thumbnail
+                }*/
+
+                // Options for Navigator #4
+                /*$ThumbnailNavigatorOptions: {
+                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+
+                    $ActionMode: 1,                                 //[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
+                    $AutoCenter: 0,                                 //[Optional] Auto center thumbnail items in the thumbnail navigator container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 3
+                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange thumbnails, default value is 1
+                    $SpacingX: 3,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
+                    $SpacingY: 3,                                   //[Optional] Vertical space between each thumbnail in pixel, default value is 0
+                    $DisplayPieces: 9,                              //[Optional] Number of pieces to display, default value is 1
+                    $ParkingPosition: 260,                          //[Optional] The offset position to park thumbnail
+                    $Orientation: 1,                                //[Optional] Orientation to arrange thumbnails, 1 horizental, 2 vertical, default value is 1
+                    $DisableDrag: false                            //[Optional] Disable drag or not, default value is false
+                }*/
+
+                // Options for Navigator #7
+                /*$ThumbnailNavigatorOptions: {                       //[Optional] Options to specify and enable thumbnail navigator or not
+                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+
+                    $ActionMode: 1,                                 //[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
+                    $SpacingX: 8,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
+                    $DisplayPieces: 10,                             //[Optional] Number of pieces to display, default value is 1
+                    $ParkingPosition: 360                           //[Optional] The offset position to park thumbnail
+                }*/
+
+                // Options for Navigator #11
+                $ThumbnailNavigatorOptions: {
+                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+
+                    $ActionMode: 1,                                 //[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
+                    $AutoCenter: 3,                                 //[Optional] Auto center thumbnail items in the thumbnail navigator container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 3
+                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange thumbnails, default value is 1
+                    $SpacingX: 3,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
+                    $SpacingY: 3,                                   //[Optional] Vertical space between each thumbnail in pixel, default value is 0
+                    $DisplayPieces: 9,                              //[Optional] Number of pieces to display, default value is 1
+                    $ParkingPosition: 250,                          //[Optional] The offset position to park thumbnail
+                    $Orientation: 1,                                //[Optional] Orientation to arrange thumbnails, 1 horizental, 2 vertical, default value is 1
+                    $DisableDrag: false                            //[Optional] Disable drag or not, default value is false
                 }
             };
             var jssor_slider1 = new $JssorSlider$('slider1_container', options);
@@ -101,6 +146,26 @@
 <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 600px; height: 300px;">
     <!-- Slides Container -->
     <div data-u="slides" style="position: absolute; overflow: hidden; left: 0px; top: 0px; width: 600px; height: 300px;">
+        <div>
+            <img data-u="image" src="http://www.jssor.com/img/alila/10.jpg" />
+            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-10.jpg" />
+        </div>
+        <div>
+            <img data-u="image" src="http://www.jssor.com/img/alila/11.jpg" />
+            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-11.jpg" />
+        </div>
+        <div>
+            <img data-u="image" src="http://www.jssor.com/img/alila/12.jpg" />
+            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-12.jpg" />
+        </div>
+        <div>
+            <img data-u="image" src="http://www.jssor.com/img/alila/13.jpg" />
+            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-13.jpg" />
+        </div>
+        <div>
+            <img data-u="image" src="http://www.jssor.com/img/alila/14.jpg" />
+            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-14.jpg" />
+        </div>
         <div>
             <img data-u="image" src="http://www.jssor.com/img/alila/10.jpg" />
             <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-10.jpg" />
@@ -134,19 +199,57 @@
     <span data-u="arrowleft" class="jssora14l" style="width: 30px; height: 50px; top: 123px; left: 0px;"></span>
     <span data-u="arrowright" class="jssora14r" style="width: 30px; height: 50px; top: 123px; right: 0px"></span>
     <!-- End arrow skin #14 -->
+    @*
+        <!-- Thumbnail Navigator Skin #01 Begin -->
+        <div data-u="thumbnavigator" class="jssort01" style="position: absolute; width: 800px; height: 100px; left:0px; bottom: 0px;">
+            <!-- Thumbnail Item Skin Begin -->
+            <div data-u="slides" style="cursor: move;">
+                <div data-u="prototype" class="p" style="position: absolute; width: 72px; height: 72px; top: 0; left: 0;">
+                    <div class="w"><thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate></div>
+                    <div class="c"></div>
+                </div>
+            </div>
+            <!-- Thumbnail Item Skin End -->
+        </div>
+        <!-- Thumbnail Navigator Skin #01 End -->
+    *@
 
-    <!-- Thumbnail Navigator Skin Begin -->
-    <div data-u="thumbnavigator" class="jssort01" style="position: absolute; width: 800px; height: 100px; left:0px; bottom: 0px;">
-        <!-- Thumbnail Item Skin Begin -->
-        <div data-u="slides" style="cursor: move;">
-            <div data-u="prototype" class="p" style="position: absolute; width: 72px; height: 72px; top: 0; left: 0;">
-                <div class=w><thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate></div>
-                <div class=c>
+    @*
+        <!-- Thumbnail Navigator Skin #04 Begin -->
+        <div data-u="thumbnavigator" class="jssort04" style="position: absolute; width: 600px; height: 60px; right:0px; bottom: 0px;">
+            <div data-u="slides" style="bottom: 25px; right: 30px;">
+                <div data-u="prototype" class="p" style="POSITION: absolute; WIDTH: 62px; HEIGHT: 32px; TOP: 0; LEFT: 0;">
+                    <div class="w"><thumbnailtemplate style=" WIDTH: 100%; HEIGHT: 100%; border: none;position:absolute; TOP: 0; LEFT: 0;"></thumbnailtemplate></div>
+                    <div class="c" style="POSITION: absolute; BACKGROUND-COLOR: #000; TOP: 0; LEFT: 0"></div>
                 </div>
             </div>
         </div>
-        <!-- Thumbnail Item Skin End -->
+        <!-- Thumbnail Navigator Skin #04 End -->
+    *@
+
+    @*
+    <!-- Thumbnail Navigator Skin #07 Begin -->
+    <div data-u="thumbnavigator" class="jssort07" style="position: absolute; width: 800px; height: 100px; left:0px; bottom: 0px;">
+        <div data-u="slides" style="cursor: move;">
+            <div data-u="prototype" class="p" style="POSITION: absolute; WIDTH: 72px; HEIGHT: 72px; TOP: 0; LEFT: 0;">
+                <thumbnailtemplate class="i" style="position:absolute;"></thumbnailtemplate>
+                <div class="o"></div>
+            </div>
+        </div>
     </div>
-</div>
-<!-- Jssor Slider End -->
+    <!-- Thumbnail Navigator Skin #07 End -->
+    *@
+
+    <!-- Thumbnail Navigator Skin #11 Begin -->
+    <div data-u="thumbnavigator" class="jssort11" style="cursor: default; position: absolute; width: 600px; height: 60px; left:0px; bottom: 0px;">
+        <div style=" background-color: #000; filter:alpha(opacity=30); opacity:.3; width: 100%; height:100%;"></div>
+        <style>
+        </style>
+        <div data-u="slides" style="cursor: move;">
+            <div data-u="prototype" class=p style="POSITION: absolute; WIDTH: 60px; HEIGHT: 30px; TOP: 0; LEFT: 0;">
+                <thumbnailtemplate class=t style=" WIDTH: 60px; HEIGHT: 30px; border: none;position:absolute; TOP: 0; LEFT: 0;"></thumbnailtemplate>
+            </div>
+        </div>
+    </div>
+    <!-- Thumbnail Navigator Skin #11 End -->
 </div>

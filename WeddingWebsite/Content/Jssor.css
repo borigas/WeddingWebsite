@@ -121,3 +121,131 @@
 .jssora14rdn {
     background-position: -315px -35px;
 }
+/* jssor slider thumbnail navigator skin 04 css */
+/*
+                        .jssort04 .p            (normal)
+                        .jssort04 .p:hover      (normal mouseover)
+                        .jssort04 .pav          (active)
+                        .jssort04 .pav:hover    (active mouseover)
+                        .jssort04 .pdn          (mousedown)
+                        */
+.jssort04 .w, .jssort04 .pav:hover .w {
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    border: #0099FF 1px solid;
+}
+
+* html .jssort04 .w {
+    width /**/: 62px;
+    height /**/: 32px;
+}
+
+.jssort04 .pdn .w, .jssort04 .pav .w {
+    border-style: solid;
+}
+
+.jssort04 .c {
+    width: 62px;
+    height: 32px;
+    filter: alpha(opacity=45);
+    opacity: .45;
+    transition: opacity .6s;
+    -moz-transition: opacity .6s;
+    -webkit-transition: opacity .6s;
+    -o-transition: opacity .6s;
+}
+
+.jssort04 .p:hover .c, .jssort04 .pav .c {
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+.jssort04 .p:hover .c {
+    transition: none;
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: none;
+}
+/* jssor slider thumbnail navigator skin 07 css */
+/*
+                .jssort07 .p            (normal)
+                .jssort07 .p:hover      (normal mouseover)
+                .jssort07 .pav          (active)
+                .jssort07 .pav:hover    (active mouseover)
+                .jssort07 .pdn          (mousedown)
+                */
+.jssort07 .i {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    filter: alpha(opacity=80);
+    opacity: .8;
+}
+
+.jssort07 .p:hover .i, .jssort07 .pav .i {
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+
+.jssort07 .o {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 70px;
+    height: 70px;
+    border: 1px solid #000;
+    transition: border-color .6s;
+    -moz-transition: border-color .6s;
+    -webkit-transition: border-color .6s;
+    -o-transition: border-color .6s;
+}
+
+* html .jssort07 .o {
+    /* ie quirks mode adjust */
+    width /**/: 72px;
+    height /**/: 72px;
+}
+
+.jssort07 .pav .o, .jssort07 .p:hover .o {
+    border-color: #fff;
+}
+
+.jssort07 .pav:hover .o {
+    border-color: #0099FF;
+}
+
+.jssort07 .p:hover .o {
+    transition: none;
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: none;
+}
+
+/* jssor slider thumbnail Navigator Skin 11 css */
+/*
+                .jssort11 .p            (normal)
+                .jssort11 .p:hover      (normal mouseover)
+                .jssort11 .pav          (active)
+                .jssort11 .pav:hover    (active mouseover)
+                .jssort11 .pdn          (mousedown)
+                */
+.jssort11 .p .t {
+    FILTER: alpha(opacity=45);
+    opacity: .45;
+    transition: opacity .6s;
+    -moz-transition: opacity .6s;
+    -webkit-transition: opacity .6s;
+    -o-transition: opacity .6s;
+}
+
+.jssort11 .pav .t, .jssort11 .pav:hover .t, .jssort11 .p:hover .t {
+    FILTER: alpha(opacity=100);
+    opacity: 1;
+    transition: none;
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: none;
+}
