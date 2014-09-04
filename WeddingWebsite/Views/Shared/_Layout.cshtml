@@ -23,7 +23,11 @@
             <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Photos", "Index", "Photos")</li>
+                        <li>@Html.ActionLink("Locations", "Locations", "Home")</li>
+                        <li>@Html.ActionLink("Lodging", "Lodging", "Home")</li>
+                        <li>@Html.ActionLink("Registry", "Registry", "Home")</li>
+                        <li>@Html.ActionLink("RSVP", "Index", "RSVP")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     </ul>
                     @await Html.PartialAsync("_LoginPartial")
