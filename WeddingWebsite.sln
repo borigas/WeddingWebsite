@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.22013.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WeddingWebsite", "WeddingWebsite\WeddingWebsite.kproj", "{2049BA37-F10C-41F3-B164-CF32B7BA00B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeddingWebsiteOld", "WeddingWebsiteOld\WeddingWebsiteOld.csproj", "{175955C8-4FF0-4434-B96B-E46EA906A5F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2049BA37-F10C-41F3-B164-CF32B7BA00B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2049BA37-F10C-41F3-B164-CF32B7BA00B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2049BA37-F10C-41F3-B164-CF32B7BA00B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{175955C8-4FF0-4434-B96B-E46EA906A5F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{175955C8-4FF0-4434-B96B-E46EA906A5F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{175955C8-4FF0-4434-B96B-E46EA906A5F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{175955C8-4FF0-4434-B96B-E46EA906A5F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
