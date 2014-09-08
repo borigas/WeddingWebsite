@@ -2,8 +2,6 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
 @section scripts{
     <script src="https://rawgit.com/jssor/jquery-slider/master/js/jssor.core.js"></script>
     <script src="https://rawgit.com/jssor/jquery-slider/master/js/jssor.utils.js"></script>
@@ -138,118 +136,143 @@
                     $DisableDrag: false                            //[Optional] Disable drag or not, default value is false
                 }
             };
-            var jssor_slider1 = new $JssorSlider$('slider1_container', options);
+            var jssor_slider1 = new $JssorSlider$('slider_container', options);
+
+            function ScaleSlider() {
+                var containerHeight = 300;
+                var containerWidth = 600;
+                var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+                var parentHeight = jssor_slider1.$Elmt.parentNode.clientHeight;
+                if (parentWidth && parentHeight) {
+                    // Find the new width if we're scaling based on height
+                    //var heightAdjustedNewWidth = containerWidth / containerHeight * parentHeight;
+                    //var widthAdjustedNewWidth = Math.max(parentWidth, 300) * .9;
+                    //var newWidth = Math.min(heightAdjustedNewWidth, widthAdjustedNewWidth);
+                    var newWidth = Math.max(parentWidth, 300);
+                    //Math.max(Math.min(parentWidth, 800), 300)
+                    jssor_slider1.$SetScaleWidth(newWidth);
+                }
+                else
+                    window.setTimeout(ScaleSlider, 30);
+            }
+
+            ScaleSlider();
+
+            //if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+            $(window).bind('resize', ScaleSlider);
         });
     </script>
 }
 
-<div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 600px; height: 300px;">
-    <!-- Slides Container -->
-    <div data-u="slides" style="position: absolute; overflow: hidden; left: 0px; top: 0px; width: 600px; height: 300px;">
-        <div>
-            <img data-u="image" src="http://www.jssor.com/img/alila/10.jpg" />
-            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-10.jpg" />
+@section fullscreen{
+    <div id="slider_container" style="position: relative; top: 0px; left: 0px; width: 600px; height: 300px;">
+        <!-- Slides Container -->
+        <div class="slides" data-u="slides" style="position: absolute; overflow: hidden; left: 0px; top: 0px; width: 600px; height: 300px;">
+            <div>
+                <img data-u="image" src="http://www.jssor.com/img/alila/10.jpg" />
+                <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-10.jpg" />
+            </div>
+            <div>
+                <img data-u="image" src="http://www.jssor.com/img/alila/11.jpg" />
+                <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-11.jpg" />
+            </div>
+            <div>
+                <img data-u="image" src="http://www.jssor.com/img/alila/12.jpg" />
+                <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-12.jpg" />
+            </div>
+            <div>
+                <img data-u="image" src="http://www.jssor.com/img/alila/13.jpg" />
+                <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-13.jpg" />
+            </div>
+            <div>
+                <img data-u="image" src="http://www.jssor.com/img/alila/14.jpg" />
+                <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-14.jpg" />
+            </div>
+            <div>
+                <img data-u="image" src="http://www.jssor.com/img/alila/10.jpg" />
+                <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-10.jpg" />
+            </div>
+            <div>
+                <img data-u="image" src="http://www.jssor.com/img/alila/11.jpg" />
+                <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-11.jpg" />
+            </div>
+            <div>
+                <img data-u="image" src="http://www.jssor.com/img/alila/12.jpg" />
+                <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-12.jpg" />
+            </div>
+            <div>
+                <img data-u="image" src="http://www.jssor.com/img/alila/13.jpg" />
+                <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-13.jpg" />
+            </div>
+            <div>
+                <img data-u="image" src="http://www.jssor.com/img/alila/14.jpg" />
+                <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-14.jpg" />
+            </div>
         </div>
-        <div>
-            <img data-u="image" src="http://www.jssor.com/img/alila/11.jpg" />
-            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-11.jpg" />
-        </div>
-        <div>
-            <img data-u="image" src="http://www.jssor.com/img/alila/12.jpg" />
-            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-12.jpg" />
-        </div>
-        <div>
-            <img data-u="image" src="http://www.jssor.com/img/alila/13.jpg" />
-            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-13.jpg" />
-        </div>
-        <div>
-            <img data-u="image" src="http://www.jssor.com/img/alila/14.jpg" />
-            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-14.jpg" />
-        </div>
-        <div>
-            <img data-u="image" src="http://www.jssor.com/img/alila/10.jpg" />
-            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-10.jpg" />
-        </div>
-        <div>
-            <img data-u="image" src="http://www.jssor.com/img/alila/11.jpg" />
-            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-11.jpg" />
-        </div>
-        <div>
-            <img data-u="image" src="http://www.jssor.com/img/alila/12.jpg" />
-            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-12.jpg" />
-        </div>
-        <div>
-            <img data-u="image" src="http://www.jssor.com/img/alila/13.jpg" />
-            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-13.jpg" />
-        </div>
-        <div>
-            <img data-u="image" src="http://www.jssor.com/img/alila/14.jpg" />
-            <img data-u="thumb" src="http://www.jssor.com/img/alila/thumb-14.jpg" />
-        </div>
-    </div>
 
-    @*
-        <!-- Nav arrow skin #5 -->
-        <span data-u="arrowleft" class="jssora05l" style="width: 40px; height: 40px; top: 158px; left: 8px;"></span>
-        <span data-u="arrowright" class="jssora05r" style="width: 40px; height: 40px; top: 158px; right: 8px"></span>
-        <!-- End arrow skin #5 -->
-    *@
+        @*
+            <!-- Nav arrow skin #5 -->
+            <span data-u="arrowleft" class="jssora05l" style="width: 40px; height: 40px; top: 158px; left: 8px;"></span>
+            <span data-u="arrowright" class="jssora05r" style="width: 40px; height: 40px; top: 158px; right: 8px"></span>
+            <!-- End arrow skin #5 -->
+        *@
 
-    <!-- Nav arrow skin #14 -->
-    <span data-u="arrowleft" class="jssora14l" style="width: 30px; height: 50px; top: 123px; left: 0px;"></span>
-    <span data-u="arrowright" class="jssora14r" style="width: 30px; height: 50px; top: 123px; right: 0px"></span>
-    <!-- End arrow skin #14 -->
-    @*
-        <!-- Thumbnail Navigator Skin #01 Begin -->
-        <div data-u="thumbnavigator" class="jssort01" style="position: absolute; width: 800px; height: 100px; left:0px; bottom: 0px;">
-            <!-- Thumbnail Item Skin Begin -->
+        <!-- Nav arrow skin #14 -->
+        <span data-u="arrowleft" class="jssora14l" style="width: 30px; height: 50px; top: 123px; left: 0px;"></span>
+        <span data-u="arrowright" class="jssora14r" style="width: 30px; height: 50px; top: 123px; right: 0px"></span>
+        <!-- End arrow skin #14 -->
+        @*
+            <!-- Thumbnail Navigator Skin #01 Begin -->
+            <div data-u="thumbnavigator" class="jssort01" style="position: absolute; width: 800px; height: 100px; left:0px; bottom: 0px;">
+                <!-- Thumbnail Item Skin Begin -->
+                <div data-u="slides">
+                    <div data-u="prototype" class="p" style="position: absolute; width: 72px; height: 72px; top: 0; left: 0;">
+                        <div class="w"><thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate></div>
+                        <div class="c"></div>
+                    </div>
+                </div>
+                <!-- Thumbnail Item Skin End -->
+            </div>
+            <!-- Thumbnail Navigator Skin #01 End -->
+        *@
+
+        @*
+            <!-- Thumbnail Navigator Skin #04 Begin -->
+            <div data-u="thumbnavigator" class="jssort04" style="position: absolute; width: 600px; height: 60px; right:0px; bottom: 0px;">
+                <div data-u="slides" style="bottom: 25px; right: 30px;">
+                    <div data-u="prototype" class="p" style="POSITION: absolute; WIDTH: 62px; HEIGHT: 32px; TOP: 0; LEFT: 0;">
+                        <div class="w"><thumbnailtemplate style=" WIDTH: 100%; HEIGHT: 100%; border: none;position:absolute; TOP: 0; LEFT: 0;"></thumbnailtemplate></div>
+                        <div class="c" style="POSITION: absolute; BACKGROUND-COLOR: #000; TOP: 0; LEFT: 0"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Thumbnail Navigator Skin #04 End -->
+        *@
+
+        @*
+            <!-- Thumbnail Navigator Skin #07 Begin -->
+            <div data-u="thumbnavigator" class="jssort07" style="position: absolute; width: 800px; height: 100px; left:0px; bottom: 0px;">
+                <div data-u="slides">
+                    <div data-u="prototype" class="p" style="POSITION: absolute; WIDTH: 72px; HEIGHT: 72px; TOP: 0; LEFT: 0;">
+                        <thumbnailtemplate class="i" style="position:absolute;"></thumbnailtemplate>
+                        <div class="o"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Thumbnail Navigator Skin #07 End -->
+        *@
+
+        <!-- Thumbnail Navigator Skin #11 Begin -->
+        <div data-u="thumbnavigator" class="jssort11" style="cursor: default; position: absolute; width: 600px; height: 60px; left:0px; bottom: 0px;">
+            <div style=" background-color: #000; filter:alpha(opacity=30); opacity:.3; width: 100%; height:100%;"></div>
+            <style>
+            </style>
             <div data-u="slides">
-                <div data-u="prototype" class="p" style="position: absolute; width: 72px; height: 72px; top: 0; left: 0;">
-                    <div class="w"><thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate></div>
-                    <div class="c"></div>
-                </div>
-            </div>
-            <!-- Thumbnail Item Skin End -->
-        </div>
-        <!-- Thumbnail Navigator Skin #01 End -->
-    *@
-
-    @*
-        <!-- Thumbnail Navigator Skin #04 Begin -->
-        <div data-u="thumbnavigator" class="jssort04" style="position: absolute; width: 600px; height: 60px; right:0px; bottom: 0px;">
-            <div data-u="slides" style="bottom: 25px; right: 30px;">
-                <div data-u="prototype" class="p" style="POSITION: absolute; WIDTH: 62px; HEIGHT: 32px; TOP: 0; LEFT: 0;">
-                    <div class="w"><thumbnailtemplate style=" WIDTH: 100%; HEIGHT: 100%; border: none;position:absolute; TOP: 0; LEFT: 0;"></thumbnailtemplate></div>
-                    <div class="c" style="POSITION: absolute; BACKGROUND-COLOR: #000; TOP: 0; LEFT: 0"></div>
+                <div data-u="prototype" class=p style="POSITION: absolute; WIDTH: 60px; HEIGHT: 30px; TOP: 0; LEFT: 0;">
+                    <thumbnailtemplate class=t style=" WIDTH: 60px; HEIGHT: 30px; border: none;position:absolute; TOP: 0; LEFT: 0;"></thumbnailtemplate>
                 </div>
             </div>
         </div>
-        <!-- Thumbnail Navigator Skin #04 End -->
-    *@
-
-    @*
-    <!-- Thumbnail Navigator Skin #07 Begin -->
-    <div data-u="thumbnavigator" class="jssort07" style="position: absolute; width: 800px; height: 100px; left:0px; bottom: 0px;">
-        <div data-u="slides">
-            <div data-u="prototype" class="p" style="POSITION: absolute; WIDTH: 72px; HEIGHT: 72px; TOP: 0; LEFT: 0;">
-                <thumbnailtemplate class="i" style="position:absolute;"></thumbnailtemplate>
-                <div class="o"></div>
-            </div>
-        </div>
+        <!-- Thumbnail Navigator Skin #11 End -->
     </div>
-    <!-- Thumbnail Navigator Skin #07 End -->
-    *@
-
-    <!-- Thumbnail Navigator Skin #11 Begin -->
-    <div data-u="thumbnavigator" class="jssort11" style="cursor: default; position: absolute; width: 600px; height: 60px; left:0px; bottom: 0px;">
-        <div style=" background-color: #000; filter:alpha(opacity=30); opacity:.3; width: 100%; height:100%;"></div>
-        <style>
-        </style>
-        <div data-u="slides">
-            <div data-u="prototype" class=p style="POSITION: absolute; WIDTH: 60px; HEIGHT: 30px; TOP: 0; LEFT: 0;">
-                <thumbnailtemplate class=t style=" WIDTH: 60px; HEIGHT: 30px; border: none;position:absolute; TOP: 0; LEFT: 0;"></thumbnailtemplate>
-            </div>
-        </div>
-    </div>
-    <!-- Thumbnail Navigator Skin #11 End -->
-</div>
+}
