@@ -1,0 +1,58 @@
+﻿@model WeddingWebsite.Models.Rsvp
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rsvp</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Attending)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Attending)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalAdults)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalAdults)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalChildren)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalChildren)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
