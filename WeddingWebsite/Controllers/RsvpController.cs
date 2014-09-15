@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net;
-using System.Web;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Identity;
 using System.Security.Principal;
 using WeddingWebsite.Models;
+using System.Threading.Tasks;
 
 namespace WeddingWebsite.Controllers
 {
@@ -60,7 +60,12 @@ namespace WeddingWebsite.Controllers
         // GET: Rsvp/Details/5
         public ActionResult Details(int? id)
         {
-            Rsvp rsvp = FindRsvpAndCheckPermissions(id);
+            Rsvp rsvp;
+            HttpStatusCode result = FindRsvpAndCheckPermissions(id, out rsvp);
+            if (result != HttpStatusCode.OK)
+            {
+                return new HttpStatusCodeResult((int)result);
+            }
             return View(rsvp);
         }
 
@@ -77,7 +82,7 @@ namespace WeddingWebsite.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async ActionResult Create(Rsvp rsvp)
+        public async Task<ActionResult> Create(Rsvp rsvp)
         {
             if (ModelState.IsValid)
             {
@@ -148,7 +153,12 @@ namespace WeddingWebsite.Controllers
         // GET: Rsvp/Edit/5
         public ActionResult Edit(int? id)
         {
-            Rsvp rsvp = FindRsvpAndCheckPermissions(id);
+            Rsvp rsvp;
+            HttpStatusCode result = FindRsvpAndCheckPermissions(id, out rsvp);
+            if (result != HttpStatusCode.OK)
+            {
+                return new HttpStatusCodeResult((int)result);
+            }
             return View(rsvp);
         }
 
@@ -161,7 +171,12 @@ namespace WeddingWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                Rsvp rsvpFromDb = FindRsvpAndCheckPermissions(rsvp.Id);
+                Rsvp rsvpFromDb;
+                HttpStatusCode result = FindRsvpAndCheckPermissions(rsvp.Id, out rsvpFromDb);
+                if (result != HttpStatusCode.OK)
+                {
+                    return new HttpStatusCodeResult((int)result);
+                }
                 // The user id was tampered with
                 if (rsvp.UserId != rsvpFromDb.UserId)
                 {
@@ -183,7 +198,12 @@ namespace WeddingWebsite.Controllers
         // GET: Rsvp/Delete/5
         public ActionResult Delete(int? id)
         {
-            Rsvp rsvp = FindRsvpAndCheckPermissions(id);
+            Rsvp rsvp;
+            HttpStatusCode result = FindRsvpAndCheckPermissions(id, out rsvp);
+            if (result != HttpStatusCode.OK)
+            {
+                return new HttpStatusCodeResult((int)result);
+            }
 
             return View(rsvp);
         }
@@ -193,37 +213,41 @@ namespace WeddingWebsite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Rsvp rsvp = FindRsvpAndCheckPermissions(id);
+            Rsvp rsvp;
+            HttpStatusCode result = FindRsvpAndCheckPermissions(id, out rsvp);
+            if(result != HttpStatusCode.OK)
+            {
+                return new HttpStatusCodeResult((int)result);
+            }
 
             Db.Rsvps.Remove(rsvp);
             Db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        private Rsvp FindRsvpAndCheckPermissions(int? id)
+        private HttpStatusCode FindRsvpAndCheckPermissions(int? id, out Rsvp rsvp)
         {
+            rsvp = null;
             if (id == null)
             {
-                throw new HttpException((int)HttpStatusCode.BadRequest, "Bad Request");
+                return HttpStatusCode.BadRequest;
             }
-            Rsvp rsvp = Db.Rsvps.Find(id);
+
+            rsvp = Db.Rsvps.FirstOrDefault(r => r.Id == id);
+
             if (rsvp == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                return HttpStatusCode.NotFound;
             }
 
-            CheckRsvpPermissions(rsvp);
-
-            return rsvp;
-        }
-
-        private void CheckRsvpPermissions(Rsvp rsvp)
-        {
+            // Check their permissions
             if (!User.IsInRole("admin") && User.Identity.GetUserId() != rsvp.UserId)
             {
                 // This user doesn't have permission to see this RSVP
-                throw new HttpException((int)HttpStatusCode.Unauthorized, "Unauthorized");
+                return HttpStatusCode.Unauthorized;
             }
+
+            return HttpStatusCode.OK;
         }
     }
 }
