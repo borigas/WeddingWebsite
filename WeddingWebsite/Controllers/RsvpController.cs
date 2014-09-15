@@ -77,7 +77,7 @@ namespace WeddingWebsite.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public ActionResult Create(Rsvp rsvp)
+        public async ActionResult Create(Rsvp rsvp)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +98,8 @@ namespace WeddingWebsite.Controllers
                             userName = rsvp.Name.Replace(" ", "");
                             email = userName + "@DontHaveEmail.com";
                         }
-                        user = UserManager.FindByName(userName);
+                        user = await UserManager.FindByNameAsync(userName);
+                        //user = UserManager.FindByName(userName);
                         if (user == null)
                         {
                             // Create a dummy user for this rsvp
@@ -108,10 +109,12 @@ namespace WeddingWebsite.Controllers
                                 UserName = userName,
                                 Name = rsvp.Name,
                             };
-                            IdentityResult result = UserManager.Create(newUser, email);
+                            IdentityResult result = await UserManager.CreateAsync(newUser, email);
+                            //IdentityResult result = UserManager.Create(newUser, email);
                             if (result.Succeeded)
                             {
-                                UserManager.AddToRole(newUser.Id, "user");
+                                await UserManager.AddToRoleAsync(newUser, "user");
+                                //UserManager.AddToRole(newUser.Id, "user");
                                 user = newUser;
                             }
                         }
@@ -119,8 +122,9 @@ namespace WeddingWebsite.Controllers
                         if (user != null)
                         {
                             // If not an admin, sign them into the account
-                            var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-                            signInManager.SignIn(user, isPersistent: true, rememberBrowser: false);
+                            //var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
+                            //signInManager.SignIn(user, isPersistent: true, rememberBrowser: false);
+                            await SignInManager.SignInAsync(user, isPersistent: true);
 
                             // Assign RSVP.UserId
                             // Save the user id to the rsvp
