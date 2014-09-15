@@ -11,14 +11,14 @@ namespace WeddingWebsite.Controllers
 {
     public class BaseController : Controller
     {
-        protected WeddingWebsiteContext _db = null;
-        protected WeddingWebsiteContext Db
+        protected ApplicationDbContext _db = null;
+        protected ApplicationDbContext Db
         {
             get
             {
                 if (_db == null)
                 {
-                    _db = new WeddingWebsiteContext();
+                    _db = new ApplicationDbContext();
                 }
                 return _db;
             }
