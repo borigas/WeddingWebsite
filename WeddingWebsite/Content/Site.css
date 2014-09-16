@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+.fullscreen {
+    height: 90%; /* Fallback for old browsers */
+    height: calc(100% - 50px);
+    width: 100%;
+    position: absolute;
+}

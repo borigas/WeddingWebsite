@@ -139,16 +139,16 @@
             var jssor_slider1 = new $JssorSlider$('slider_container', options);
 
             function ScaleSlider() {
-                var containerHeight = 300;
-                var containerWidth = 600;
+                var containerHeight = jssor_slider1.$Elmt.clientHeight;
+                var containerWidth = jssor_slider1.$Elmt.clientWidth;
                 var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
                 var parentHeight = jssor_slider1.$Elmt.parentNode.clientHeight;
                 if (parentWidth && parentHeight) {
                     // Find the new width if we're scaling based on height
-                    //var heightAdjustedNewWidth = containerWidth / containerHeight * parentHeight;
+                    var heightAdjustedNewWidth = containerWidth / containerHeight * parentHeight;
                     //var widthAdjustedNewWidth = Math.max(parentWidth, 300) * .9;
-                    //var newWidth = Math.min(heightAdjustedNewWidth, widthAdjustedNewWidth);
-                    var newWidth = Math.max(parentWidth, 300);
+                    var newWidth = Math.min(heightAdjustedNewWidth, parentWidth);
+                    newWidth = Math.max(newWidth, 300);
                     //Math.max(Math.min(parentWidth, 800), 300)
                     jssor_slider1.$SetScaleWidth(newWidth);
                 }
@@ -165,7 +165,7 @@
 }
 
 @section fullscreen{
-    <div id="slider_container" style="position: relative; top: 0px; left: 0px; width: 600px; height: 300px;">
+    <div id="slider_container" style="position: relative; top: 0px; width: 600px; height: 300px; margin:auto;">
         <!-- Slides Container -->
         <div class="slides" data-u="slides" style="position: absolute; overflow: hidden; left: 0px; top: 0px; width: 600px; height: 300px;">
             <div>
