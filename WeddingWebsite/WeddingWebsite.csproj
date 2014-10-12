@@ -179,12 +179,14 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Amazon-Logo-2.png" />
     <Content Include="Content\Amazon-Logo.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Dillards-Logo.jpg" />
+    <Content Include="Content\Favicon.png" />
     <Content Include="Content\Jssor.css" />
     <Content Include="Content\Lowes_logo.jpg" />
     <Content Include="Content\target-logo.png" />
