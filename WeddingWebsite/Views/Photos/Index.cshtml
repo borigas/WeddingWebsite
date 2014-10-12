@@ -3,8 +3,7 @@
 }
 
 @section scripts{
-    <script src="https://rawgit.com/jssor/jquery-slider/master/js/jssor.js"></script>
-    <script src="https://rawgit.com/jssor/jquery-slider/master/js/jssor.slider.js"></script>
+    @Scripts.Render("~/bundles/jssor")
     <script>
         jQuery(document).ready(function ($) {
             var _SlideshowTransitions = [
