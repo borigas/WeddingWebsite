@@ -35,3 +35,89 @@ textarea {
     width: 300px;
     padding-bottom: 50px;
 }
+
+
+/* Arrows for jssor image gallary prev/next icons*/
+.next,
+.prev {
+    color: #777;
+    display: inline-block;
+    font: normal bold 2em Arial,sans-serif;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.next {
+    text-align: right;
+}
+
+    .next:before,
+    .next:after,
+    .prev:before,
+    .prev:after {
+        background: #777;
+        -moz-border-radius: 0.125em;
+        -webkit-border-radius: 0.125em;
+        border-radius: 0.125em;
+        content: "";
+        display: block;
+        height: 4px;
+        position: absolute;
+        top: 50%;
+        width: 14px;
+    }
+
+.prev:before,
+.prev:after {
+    left: 2px;
+}
+
+.next:before,
+.next:after {
+    right: 2px;
+}
+
+.next:before,
+.prev:before {
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.next:after,
+.prev:after {
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.prev:after,
+.next:before {
+    margin-top: -8px;
+}
+
+.next:hover,
+.next:focus,
+.prev:hover,
+.prev:focus {
+    color: #CCC;
+}
+
+    .next:hover:before,
+    .next:hover:after,
+    .next:focus:before,
+    .next:focus:after,
+    .prev:hover:before,
+    .prev:hover:after,
+    .prev:focus:before,
+    .prev:focus:after {
+        background: #CCC;
+    }

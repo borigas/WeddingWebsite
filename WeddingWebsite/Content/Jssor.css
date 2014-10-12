@@ -94,7 +94,7 @@
     position: absolute;
     cursor: pointer;
     display: block;
-    background: url(http://www.jssor.com/img/a14.png) no-repeat;
+    /*background: url(http://www.jssor.com/img/a14.png) no-repeat;*/
     overflow: hidden;
 }
 
