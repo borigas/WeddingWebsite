@@ -96,14 +96,35 @@
     display: block;
     /*background: url(http://www.jssor.com/img/a14.png) no-repeat;*/
     overflow: hidden;
+
+    width: 25px;
+    height: 50px;
+    top: 123px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.jssora14l:hover, .jssora14r:hover {
+    background: rgba(0, 0, 0, 0.75);
 }
 
 .jssora14l {
     background-position: -15px -35px;
+    
+    left: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 0px;
 }
 
 .jssora14r {
     background-position: -75px -35px;
+
+    right: 0px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 50px;
 }
 
 .jssora14l:hover {

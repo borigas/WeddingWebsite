@@ -40,7 +40,7 @@ textarea {
 /* Arrows for jssor image gallary prev/next icons*/
 .next,
 .prev {
-    color: #777;
+    color: #CCC;
     display: inline-block;
     font: normal bold 2em Arial,sans-serif;
     overflow: hidden;
@@ -49,6 +49,7 @@ textarea {
     height: 100%;
     width: 100%;
     z-index: 1;
+    opacity: 0.3;
 }
 
 .next {
@@ -59,7 +60,7 @@ textarea {
     .next:after,
     .prev:before,
     .prev:after {
-        background: #777;
+        background: #CCC;
         -moz-border-radius: 0.125em;
         -webkit-border-radius: 0.125em;
         border-radius: 0.125em;
@@ -67,7 +68,7 @@ textarea {
         display: block;
         height: 4px;
         position: absolute;
-        top: 50%;
+        top: 54%;
         width: 14px;
     }
 
@@ -108,7 +109,7 @@ textarea {
 .next:focus,
 .prev:hover,
 .prev:focus {
-    color: #CCC;
+    opacity: 1;
 }
 
     .next:hover:before,
@@ -119,5 +120,5 @@ textarea {
     .prev:hover:after,
     .prev:focus:before,
     .prev:focus:after {
-        background: #CCC;
+        opacity: 1;
     }
