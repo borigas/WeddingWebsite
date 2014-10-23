@@ -103,13 +103,7 @@
     background: rgba(0, 0, 0, 0.5);
 }
 
-.jssora14l:hover, .jssora14r:hover {
-    background: rgba(0, 0, 0, 0.75);
-}
-
-.jssora14l {
-    background-position: -15px -35px;
-    
+.jssora14l, .jssora14ldn {
     left: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 50px;
@@ -117,9 +111,7 @@
     border-bottom-left-radius: 0px;
 }
 
-.jssora14r {
-    background-position: -75px -35px;
-
+.jssora14r, .jssora14rdn {
     right: 0px;
     border-top-left-radius: 50px;
     border-top-right-radius: 0px;
@@ -127,21 +119,10 @@
     border-bottom-left-radius: 50px;
 }
 
-.jssora14l:hover {
-    background-position: -135px -35px;
+.jssora14l:hover, .jssora14r:hover, .jssora14l:active, .jssora14r:active {
+    background: rgba(0, 0, 0, 0.75);
 }
 
-.jssora14r:hover {
-    background-position: -195px -35px;
-}
-
-.jssora14ldn {
-    background-position: -255px -35px;
-}
-
-.jssora14rdn {
-    background-position: -315px -35px;
-}
 /* jssor slider thumbnail navigator skin 04 css */
 /*
                         .jssort04 .p            (normal)
