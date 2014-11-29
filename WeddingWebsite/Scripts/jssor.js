@@ -1,6 +1,9 @@
 ﻿/*
 * Jssor 18.0
 * http://www.jssor.com/
+*
+* Licensed under the MIT license:
+* http://www.opensource.org/licenses/MIT
 * 
 * TERMS OF USE - Jssor
 * 
@@ -107,12 +110,12 @@ var $JssorDebug$ = new function () {
         throw new Error("The method is abstract, it should be implemented by subclass.");
     };
 
-    function C_AbstractClass (instance) {
+    function C_AbstractClass(instance) {
         ///	<summary>
         ///		Tells compiler the class is abstract, it should be implemented by subclass.
         ///	</summary>
 
-        if(instance.constructor === C_AbstractClass.caller)
+        if (instance.constructor === C_AbstractClass.caller)
             throw new Error("Cannot create instance of an abstract class.");
     }
 
@@ -471,12 +474,8 @@ var $Jssor$ = window.$Jssor$ = new function () {
         return IsBrowserSafari() && (webkitVersion > 534) && (webkitVersion < 535);
     }
 
-    function IsBrowserSafeHWA() {
-        return IsBrowserSafari() && (webkitVersion < 535);
-    }
-
     function IsBrowserIe9Earlier() {
-        return IsBrowserIE() && browserRuntimeVersion < 9; 
+        return IsBrowserIE() && browserRuntimeVersion < 9;
     }
 
     function GetTransformProperty(elmt) {
@@ -655,8 +654,6 @@ var $Jssor$ = window.$Jssor$ = new function () {
 
     _This.$IsBrowserBadTransform = IsBrowserBadTransform;
 
-    _This.$IsBrowserSafeHWA = IsBrowserSafeHWA;
-
     _This.$IsBrowserIe9Earlier = IsBrowserIe9Earlier;
 
     _This.$BrowserVersion = function () {
@@ -668,6 +665,8 @@ var $Jssor$ = window.$Jssor$ = new function () {
     };
 
     _This.$WebKitVersion = function () {
+        DetectBrowser();
+
         return webkitVersion;
     };
 
@@ -696,7 +695,7 @@ var $Jssor$ = window.$Jssor$ = new function () {
         return event || window.event;
     }
 
-    GetEvent = GetEvent;
+    _This.$GetEvent = GetEvent;
 
     _This.$EventSrc = function (event) {
         event = GetEvent(event);
@@ -1005,7 +1004,9 @@ var $Jssor$ = window.$Jssor$ = new function () {
             var transformProperty = GetTransformProperty(elmt);
             if (transformProperty) {
                 var transformValue = "rotate(" + rotate % 360 + "deg) scale(" + scale + ")";
-                if (IsBrowserChrome() && webkitVersion > 535)
+
+                //needed for touch device, no need for desktop device
+                if (IsBrowserChrome() && webkitVersion > 535 && "ontouchstart" in window)
                     transformValue += " perspective(2000px)";
 
                 elmt.style[transformProperty] = transformValue;
@@ -1318,7 +1319,7 @@ var $Jssor$ = window.$Jssor$ = new function () {
         _This.$ClearInnerHtml(elmt);
         elmt.appendChild(textNode);
     };
-    
+
     _This.$InnerHtml = function (elmt, html) {
         if (html == undefined)
             return elmt.innerHTML;
@@ -1389,17 +1390,16 @@ var $Jssor$ = window.$Jssor$ = new function () {
         return children;
     };
 
-    function FindFirstChild(elmt, attrValue, attrName, deep) {
-        if (!attrName)
-            attrName = "u";
+    function FindChild(elmt, attrValue, noDeep, attrName) {
+        attrName = attrName || "u";
 
         for (elmt = elmt ? elmt.firstChild : null; elmt; elmt = elmt.nextSibling) {
             if (elmt.nodeType == 1) {
                 if (AttributeEx(elmt, attrName) == attrValue)
                     return elmt;
 
-                if (deep) {
-                    var childRet = FindFirstChild(elmt, attrValue, attrName, deep);
+                if (!noDeep) {
+                    var childRet = FindChild(elmt, attrValue, noDeep, attrName);
                     if (childRet)
                         return childRet;
                 }
@@ -1407,11 +1407,10 @@ var $Jssor$ = window.$Jssor$ = new function () {
         }
     }
 
-    _This.$FindFirstChild = FindFirstChild;
+    _This.$FindChild = FindChild;
 
-    function FindChildren(elmt, attrValue, attrName, deep) {
-        if (!attrName)
-            attrName = "u";
+    function FindChildren(elmt, attrValue, noDeep, attrName) {
+        attrName = attrName || "u";
 
         var ret = [];
 
@@ -1420,8 +1419,8 @@ var $Jssor$ = window.$Jssor$ = new function () {
                 if (AttributeEx(elmt, attrName) == attrValue)
                     ret.push(elmt);
 
-                if (deep) {
-                    var childRet = FindChildren(elmt, attrValue, attrName, deep);
+                if (!noDeep) {
+                    var childRet = FindChildren(elmt, attrValue, noDeep, attrName);
                     if (childRet.length)
                         ret = ret.concat(childRet);
                 }
@@ -1433,15 +1432,15 @@ var $Jssor$ = window.$Jssor$ = new function () {
 
     _This.$FindChildren = FindChildren;
 
-    function FindFirstChildByTag(elmt, tagName, deep) {
+    function FindChildByTag(elmt, tagName, noDeep) {
 
         for (elmt = elmt ? elmt.firstChild : null; elmt; elmt = elmt.nextSibling) {
             if (elmt.nodeType == 1) {
                 if (elmt.tagName == tagName)
                     return elmt;
 
-                if (deep) {
-                    var childRet = FindFirstChildByTag(elmt, tagName, deep);
+                if (!noDeep) {
+                    var childRet = FindChildByTag(elmt, tagName, noDeep);
                     if (childRet)
                         return childRet;
                 }
@@ -1449,9 +1448,9 @@ var $Jssor$ = window.$Jssor$ = new function () {
         }
     }
 
-    _This.$FindFirstChildByTag = FindFirstChildByTag;
+    _This.$FindChildByTag = FindChildByTag;
 
-    function FindChildrenByTag(elmt, tagName, deep) {
+    function FindChildrenByTag(elmt, tagName, noDeep) {
         var ret = [];
 
         for (elmt = elmt ? elmt.firstChild : null; elmt; elmt = elmt.nextSibling) {
@@ -1459,8 +1458,8 @@ var $Jssor$ = window.$Jssor$ = new function () {
                 if (!tagName || elmt.tagName == tagName)
                     ret.push(elmt);
 
-                if (deep) {
-                    var childRet = FindChildrenByTag(elmt, tagName, true);
+                if (!noDeep) {
+                    var childRet = FindChildrenByTag(elmt, tagName, noDeep);
                     if (childRet.length)
                         ret = ret.concat(childRet);
                 }
@@ -1633,19 +1632,28 @@ var $Jssor$ = window.$Jssor$ = new function () {
         _This.$CssDisplay(elmt, "none");
     };
 
+    _This.$EnableElement = function (elmt, notEnable) {
+        if (notEnable) {
+            _This.$Attribute(elmt, "disabled", true);
+        }
+        else {
+            _This.$RemoveAttribute(elmt, "disabled");
+        }
+    };
+
     _This.$HideElements = function (elmts) {
         for (var i = 0; i < elmts.length; i++) {
             _This.$HideElement(elmts[i]);
         }
     };
 
-    _This.$ShowElement = function (elmt, show) {
-        _This.$CssDisplay(elmt, show == false ? "none" : "");
+    _This.$ShowElement = function (elmt, hide) {
+        _This.$CssDisplay(elmt, hide ? "none" : "");
     };
 
-    _This.$ShowElements = function (elmts) {
+    _This.$ShowElements = function (elmts, hide) {
         for (var i = 0; i < elmts.length; i++) {
-            _This.$ShowElement(elmts[i]);
+            _This.$ShowElement(elmts[i], hide);
         }
     };
 
@@ -1737,8 +1745,8 @@ var $Jssor$ = window.$Jssor$ = new function () {
         return elmtA == elmtB;
     };
 
-    function CloneNode(elmt, deep) {
-        return elmt.cloneNode(deep);
+    function CloneNode(elmt, noDeep) {
+        return elmt.cloneNode(!noDeep);
     }
 
     _This.$CloneNode = CloneNode;
@@ -1760,6 +1768,9 @@ var $Jssor$ = window.$Jssor$ = new function () {
                 transition.y = -transition.$ScaleVertical || -1;
             }
 
+            if (transition.$Rotate == true)
+                transition.$Rotate = 1;
+
             TranslateTransition(transition.$Brother);
         }
     }
@@ -1778,22 +1789,96 @@ var $Jssor$ = window.$Jssor$ = new function () {
         }
     };
 
-    function LoadImageCallback(callback, image, abort) {
-        image.onload = null;
-        image.abort = null;
+    //function ImageLoader() {
+    //    var _ThisImageLoader = this;
+    //    var _BaseImageLoader = _This.$Inherit(_ThisImageLoader, $JssorObject$);
 
-        if (callback)
-            callback(image, abort);
-    }
+    //    var _ImageLoading = 1;
+    //    var _MainImageSrc;
+    //    var _MainImage;
+    //    var _CompleteCallback;
+    //    var _MainImageAbort;
+
+    //    function LoadCompleteCallback(image, abort) {
+    //        _ImageLoading--;
+
+    //        if (image) {
+    //            _This.$RemoveEvent(image, "load");
+    //            _This.$RemoveEvent(image, "abort");
+    //            _This.$RemoveEvent(image, "error");
+
+    //            if (_MainImageSrc == image.src) {
+    //                _MainImage = image;
+    //                _MainImageAbort = abort;
+    //            }
+    //        }
+
+    //        _CompleteCallback && _CompleteCallback(_MainImage, _MainImageAbort);
+    //    }
+
+    //    function LoadImage(src) {
+    //        _ImageLoading++;
+
+    //        if (IsBrowserOpera() && browserRuntimeVersion < 11.6 || !src) {
+    //            LoadImageCallback(callback, null, !src);
+    //        }
+    //        else {
+    //            var image = new Image();
+
+    //            _This.$AddEvent(image, "load", _This.$CreateCallback(null, LoadImageCallback, image, false));
+
+    //            var abortHandler = _This.$CreateCallback(null, LoadImageCallback, image, true);
+    //            _This.$AddEvent(image, "abort", abortHandler);
+    //            _This.$AddEvent(image, "error", abortHandler);
+
+    //            image.src = src;
+    //        }
+    //    }
+
+    //    _ThisImageLoader.$LoadImage = function (src, callback) {
+    //        _MainImageSrc = src;
+    //        _CompleteCallback = callback;
+
+    //        LoadImage(src);
+    //        LoadComplete();
+    //    };
+
+    //    _ThisImageLoader.$LoadImages = function (imageElmts, mainImageElmt, callback) {
+    //        mainImageElmt && (_MainImageSrc = mainImageElmt.src);
+    //        _CompleteCallback = callback;
+
+    //        each(imageElmts, function (imageElmt) {
+    //            LoadImage(imageElmt.src);
+    //        });
+    //        LoadComplete();
+    //    };
+    //}
 
     _This.$LoadImage = function (src, callback) {
+        var image = new Image();
+
+        function LoadImageCompleteHandler(abort) {
+            _This.$RemoveEvent(image, "load", LoadImageCompleteHandler);
+            _This.$RemoveEvent(image, "abort", ErrorOrAbortHandler);
+            _This.$RemoveEvent(image, "error", ErrorOrAbortHandler);
+
+            if (callback)
+                callback(image, abort);
+        }
+
+        function ErrorOrAbortHandler() {
+            LoadImageCompleteHandler(true);
+        }
+
         if (IsBrowserOpera() && browserRuntimeVersion < 11.6 || !src) {
-            LoadImageCallback(callback, null);
+            LoadImageCompleteHandler(!src);
         }
         else {
-            var image = new Image();
-            image.onload = _This.$CreateCallback(null, LoadImageCallback, callback, image);
-            image.onabort = _This.$CreateCallback(null, LoadImageCallback, callback, image, true);
+
+            _This.$AddEvent(image, "load", LoadImageCompleteHandler);
+            _This.$AddEvent(image, "abort", ErrorOrAbortHandler);
+            _This.$AddEvent(image, "error", ErrorOrAbortHandler);
+
             image.src = src;
         }
     };
@@ -1810,7 +1895,7 @@ var $Jssor$ = window.$Jssor$ = new function () {
         }
 
         each(imageElmts, function (imageElmt) {
-            $Jssor$.$LoadImage(imageElmt.src, LoadImageCompleteEventHandler);
+            _This.$LoadImage(imageElmt.src, LoadImageCompleteEventHandler);
         });
 
         LoadImageCompleteEventHandler();
@@ -1818,12 +1903,15 @@ var $Jssor$ = window.$Jssor$ = new function () {
 
     _This.$BuildElement = function (template, tagName, replacer, createCopy) {
         if (createCopy)
-            template = CloneNode(template, true);
+            template = CloneNode(template);
 
-        var templateHolders = $Jssor$.$GetElementsByTag(template, tagName);
+        var templateHolders = FindChildren(template, tagName);
+        if (!templateHolders.length)
+            templateHolders = $Jssor$.$GetElementsByTag(template, tagName);
+
         for (var j = templateHolders.length - 1; j > -1; j--) {
             var templateHolder = templateHolders[j];
-            var replaceItem = CloneNode(replacer, true);
+            var replaceItem = CloneNode(replacer);
             ClassName(replaceItem, ClassName(templateHolder));
             $Jssor$.$CssCssText(replaceItem, templateHolder.style.cssText);
 
@@ -1960,6 +2048,7 @@ var $Jssor$ = window.$Jssor$ = new function () {
             return GetStyleOpacity(elmt);
         }
     };
+
     _This.$CssCssText = function (elmt, text) {
         if (text != undefined) {
             elmt.style.cssText = text;
@@ -1980,33 +2069,7 @@ var $Jssor$ = window.$Jssor$ = new function () {
         $ZIndex: _This.$CssZIndex
     };
 
-    //var _StyleGetter = {
-    //    $Opacity: _This.$GetStyleOpacity,
-    //    $Top: _This.$GetStyleTop,
-    //    $Left: _This.$GetStyleLeft,
-    //    $Width: _This.$GetStyleWidth,
-    //    $Height: _This.$GetStyleHeight,
-    //    $Position: _This.$GetStylePosition,
-    //    $Display: _This.$GetStyleDisplay,
-    //    $ZIndex: _This.$GetStyleZIndex
-    //};
-
     var _StyleSetterReserved;
-
-    //var _StyleSetterReserved = {
-    //    $Opacity: _This.$SetStyleOpacity,
-    //    $Top: _This.$SetStyleTop,
-    //    $Left: _This.$SetStyleLeft,
-    //    $Width: _This.$SetStyleWidth,
-    //    $Height: _This.$SetStyleHeight,
-    //    $Display: _This.$SetStyleDisplay,
-    //    $Clip: _This.$SetStyleClip,
-    //    $MarginLeft: _This.$SetStyleMarginLeft,
-    //    $MarginTop: _This.$SetStyleMarginTop,
-    //    $Transform: _This.$SetStyleTransform,
-    //    $Position: _This.$SetStylePosition,
-    //    $ZIndex: _This.$SetStyleZIndex
-    //};
 
     function StyleSetter() {
         if (!_StyleSetterReserved) {
@@ -2431,9 +2494,9 @@ $JssorAnimator$ = function (delay, duration, options, elmt, fromStyles, toStyles
 
                     var interPosition = (positionToDisplay - _Position_InnerBegin) / (duration || 1);
 
-                    if (options.$Optimize && $Jssor$.$IsBrowserChrome() && duration) {
-                        interPosition = Math.round(interPosition / 16 * duration) * 16 / duration;
-                    }
+                    //if (options.$Optimize && $Jssor$.$IsBrowserChrome() && duration) {
+                    //    interPosition = Math.round(interPosition / 8 * duration) * 8 / duration;
+                    //}
 
                     if (options.$Reverse)
                         interPosition = 1 - interPosition;
@@ -2488,11 +2551,25 @@ $JssorAnimator$ = function (delay, duration, options, elmt, fromStyles, toStyles
         _NestedAnimators.push(animator);
     }
 
-    function PlayFrame() {
+    var RequestAnimationFrame = window.requestAnimationFrame
+    || window.webkitRequestAnimationFrame
+    || window.mozRequestAnimationFrame
+    || window.msRequestAnimationFrame;
+
+    if ($Jssor$.$IsBrowserSafari() && $Jssor$.$BrowserVersion() < 7) {
+        RequestAnimationFrame = null;
+
+        $JssorDebug$.$Log("Custom animation frame for safari before 7.");
+    }
+
+    RequestAnimationFrame = RequestAnimationFrame || function (callback) {
+        $Jssor$.$Delay(callback, options.$Interval);
+    };
+
+    function ShowFrame() {
         if (_AutoPlay) {
             var now = $Jssor$.$GetNow();
-            //var timeOffset = Math.min(now - _TimeStampLastFrame, $Jssor$.$IsBrowserOpera() ? 80 : 20);
-            var timeOffset = Math.min(now - _TimeStampLastFrame, 80);
+            var timeOffset = Math.min(now - _TimeStampLastFrame, options.$IntervalMax);
             var timePosition = _Position_Current + timeOffset * _PlayDirection;
             _TimeStampLastFrame = now;
 
@@ -2505,7 +2582,7 @@ $JssorAnimator$ = function (delay, duration, options, elmt, fromStyles, toStyles
                 Stop(_Callback);
             }
             else {
-                $Jssor$.$Delay(PlayFrame, options.$Interval);
+                RequestAnimationFrame(ShowFrame);
             }
         }
     }
@@ -2521,7 +2598,7 @@ $JssorAnimator$ = function (delay, duration, options, elmt, fromStyles, toStyles
             _PlayDirection = _PlayToPosition < _Position_Current ? -1 : 1;
             _ThisAnimator.$OnStart();
             _TimeStampLastFrame = $Jssor$.$GetNow();
-            PlayFrame();
+            RequestAnimationFrame(ShowFrame);
         }
     }
 
@@ -2669,7 +2746,8 @@ $JssorAnimator$ = function (delay, duration, options, elmt, fromStyles, toStyles
     //Constructor  1
     {
         options = $Jssor$.$Extend({
-            $Interval: 15
+            $Interval: 16,
+            $IntervalMax: 50
         }, options);
 
         //Sodo statement, for development time intellisence only
@@ -2758,7 +2836,7 @@ function $JssorPlayerClass$() {
     _ThisPlayer.$FetchPlayers = function (elmt) {
         elmt = elmt || document.body;
 
-        var playerElements = $Jssor$.$FindChildren(elmt, "player", null, true);
+        var playerElements = $Jssor$.$FindChildren(elmt, "player");
 
         $Jssor$.$Each(playerElements, function (playerElement) {
             if (!_PlayerControllers[playerElement.pId]) {
