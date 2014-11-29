@@ -29,6 +29,7 @@ textarea {
     height: calc(100% - 50px);
     width: 100%;
     position: absolute;
+    overflow:hidden;
 }
 
 .registry-logo {
