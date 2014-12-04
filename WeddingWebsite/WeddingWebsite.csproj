@@ -243,11 +243,13 @@
     <Content Include="Content\EngagementPhotos\DSC0897.jpg" />
     <Content Include="Content\EngagementPhotos\DSC0898.jpg" />
     <Content Include="Content\Favicon.png" />
+    <Content Include="Content\HuskersLogo.jpg" />
     <Content Include="Content\Jssor.css" />
     <Content Include="Content\Lowes_logo.jpg" />
     <Content Include="Content\target-logo.png" />
     <Content Include="Content\Target-logo-long.gif" />
     <Content Include="Content\td-amazon-smile-logo-01-large.jpg" />
+    <Content Include="Content\TigersLogo.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
