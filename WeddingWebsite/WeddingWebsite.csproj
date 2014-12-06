@@ -179,6 +179,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\2012SoftballChampions.jpg" />
     <Content Include="Content\Amazon-Logo-2.png" />
     <Content Include="Content\Amazon-Logo.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -186,6 +187,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Dillards-Logo.jpg" />
+    <Content Include="Content\Engaged.jpg" />
     <Content Include="Content\EngagementPhotos\DSC0502.jpg" />
     <Content Include="Content\EngagementPhotos\DSC0506.jpg" />
     <Content Include="Content\EngagementPhotos\DSC0516.jpg" />
@@ -243,6 +245,7 @@
     <Content Include="Content\EngagementPhotos\DSC0897.jpg" />
     <Content Include="Content\EngagementPhotos\DSC0898.jpg" />
     <Content Include="Content\Favicon.png" />
+    <Content Include="Content\FirstDate.jpg" />
     <Content Include="Content\HuskersLogo.png" />
     <Content Include="Content\Jssor.css" />
     <Content Include="Content\Lowes_logo.jpg" />
