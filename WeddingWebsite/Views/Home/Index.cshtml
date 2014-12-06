@@ -28,7 +28,8 @@
                 </div>
                 <div id="second-base" class="base">
                     <div class="pulse"></div>
-                    <div class="action-area"></div>
+                    <div class="action-area" data-toggle="popover" title="Popover title" data-content="And here's some amazing content.">
+                    </div>
                 </div>
                 <div id="thrid-base" class="base">
                     <div class="pulse"></div>
@@ -51,3 +52,11 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
+}
