@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron" style="overflow: auto;">
+<div class="jumbotron" style="overflow: auto; margin-bottom: 0px;">
     <div class="col-xs-3 col-md-2">
         <img class="img-responsive" src="~/Content/HuskersLogo.png" />
     </div>
@@ -23,22 +23,22 @@
                 <div id="in-field-grass" class="mowed-grass"></div>
                 <div id="batting-circle"></div>
                 <div id="first-base" class="base">
-                    <div class="pulse"></div>
+                    @*<div class="pulse"></div>*@
                     <div class="action-area"></div>
                 </div>
                 <div id="second-base" class="base">
-                    <div class="pulse"></div>
-                    <div class="action-area" data-toggle="popover" title="Popover title" data-content="And here's some amazing content.">
+                    @*<div class="pulse"></div>*@
+                    <div class="action-area">
                     </div>
                 </div>
                 <div id="third-base" class="base">
-                    <div class="pulse"></div>
+                    @*<div class="pulse"></div>*@
                     <div class="action-area"></div>
                 </div>
                 <div id="home-plate">
                     <div class="action-area"></div>
                 </div>
-                <div class="home-plate-pulse pulse"></div>
+                @*<div class="home-plate-pulse pulse"></div>*@
                 <div id="base-lines"></div>
                 <div id="pitchers-mound"></div>
                 <div id="pitchers-plate"></div>
@@ -94,8 +94,12 @@
 
                 popElement.popover({
                     title: title,
-                    content: content
+                    content: content,
+                    placement: "auto",
+                    html: true,
+                    trigger: "click"
                 });
+                popElement.popover("show");
             });
         })
     </script>
