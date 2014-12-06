@@ -52,25 +52,25 @@
         </div>
     </div>
     <div class="col-xs-12 visible-xs-block visible-sm-block">
-        <div class="panel panel-default">
+        <div class="panel panel-default" id="first-base-content">
             <div class="panel-heading">1st Met - 4/17/12</div>
             <div class="panel-body">
                 We first met at Ben's softball game
             </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default" id="second-base-content">
             <div class="panel-heading">1st Date - 7/17/12</div>
             <div class="panel-body">
                 Our first date was to a Lincoln Saltdags baseball game on 7/17/12
             </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default" id="third-base-content">
             <div class="panel-heading">Got Engaged - 7/17/12</div>
             <div class="panel-body">
                 Ben proposed in the outfield before a Lincoln Saltdogs game on 7/22/14
             </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default" id="home-plate-content">
             <div class="panel-heading">The Big Day - 6/13/14</div>
             <div class="panel-body">
                 We will be married at 49ers field in Lincoln NE on 6/13/15
@@ -82,7 +82,21 @@
 @section scripts{
     <script type="text/javascript">
         $(function () {
-            $('[data-toggle="popover"]').popover()
+            var elements = $(".action-area");
+            elements.each(function (i, element) {
+                var popElement = $(element.parentElement);
+
+                var contentPanelElement = $("#" + popElement.attr("id") + "-content");
+                var headingElement = contentPanelElement.find(".panel-heading");
+                var contentElement = contentPanelElement.find(".panel-body");
+                var title = headingElement.html();
+                var content = contentElement.html();
+
+                popElement.popover({
+                    title: title,
+                    content: content
+                });
+            });
         })
     </script>
 }
