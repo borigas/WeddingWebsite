@@ -125,7 +125,9 @@ textarea {
     }
 
 
-
+.life-event-image{
+    width: 200px;
+}
 
 #field{ 
     position:absolute;
