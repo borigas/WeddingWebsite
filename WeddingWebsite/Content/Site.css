@@ -129,6 +129,10 @@ textarea {
     width: 200px;
 }
 
+#stadium-row{
+    margin-top: -50px;
+}
+
 #field{ 
     position:absolute;
     top:-110px;

@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron" style="overflow: auto; margin-bottom: 0px;">
+<div class="jumbotron" style="overflow: auto;">
     <div class="col-xs-3 col-md-2">
         <img class="img-responsive" src="~/Content/HuskersLogo.png" />
     </div>
@@ -14,8 +14,8 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12 col-lg-offset-1 col-lg-10 visible-lg-block visible-md-block">
+<div id="stadium-row" class="row visible-lg-block visible-md-block">
+    <div class="col-md-12 col-lg-offset-1 col-lg-10">
         <div class="text-center center-block">
             <div id="stadium">
                 <div id="field" class="mowed-grass"></div>
@@ -51,7 +51,9 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 visible-xs-block visible-sm-block">
+</div>
+<div class="row visible-xs-block visible-sm-block">
+    <div class="col-xs-12">
         <div class="panel panel-default" id="first-base-content">
             <div class="panel-heading">1st Met - 4/17/12</div>
             <div class="panel-body">
