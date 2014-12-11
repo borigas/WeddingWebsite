@@ -162,7 +162,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\DirectionsController.cs" />
     <Compile Include="Controllers\LodgingController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
@@ -325,7 +325,7 @@
     <Content Include="Views\Rsvp\Edit.cshtml" />
     <Content Include="Views\Rsvp\Index.cshtml" />
     <Content Include="Views\Photos\Index.cshtml" />
-    <Content Include="Views\Location\Index.cshtml" />
+    <Content Include="Views\Directions\Index.cshtml" />
     <Content Include="Views\Lodging\Index.cshtml" />
     <Content Include="Views\Registry\Index.cshtml" />
   </ItemGroup>

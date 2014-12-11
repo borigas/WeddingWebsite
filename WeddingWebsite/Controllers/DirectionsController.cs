@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace WeddingWebsite.Controllers
 {
-    public class LocationController : Controller
+    public class DirectionsController : Controller
     {
-        // GET: Location
+        // GET: Directions
         public ActionResult Index()
         {
             return View();
