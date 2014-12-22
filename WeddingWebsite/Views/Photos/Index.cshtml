@@ -172,7 +172,8 @@
                 @foreach (var imagePath in Model)
                 {
                     <div>
-                        <img data-u="image" src="@imagePath" />
+                        <!-- src2 is used for lazy loading the image -->
+                        <img data-u="image" src2="@imagePath" />
                         @*<img data-u="thumb" src="@imagePath" />*@
                     </div>
                 }
