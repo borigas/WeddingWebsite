@@ -21,7 +21,7 @@ namespace WeddingWebsite.Controllers
 
             // Convert to a virtual path
             string absoluteRoot = Server.MapPath("~");
-            var photoPaths = photoFiles.Select(fi => fi.FullName.Replace(absoluteRoot, "")).ToArray();
+            var photoPaths = photoFiles.Select(fi => fi.FullName.Replace(absoluteRoot, @"\")).ToArray();
 
             return View(photoPaths);
         }
