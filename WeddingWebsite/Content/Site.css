@@ -124,6 +124,11 @@ textarea {
         opacity: 1;
     }
 
+.home-header{
+    overflow: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 
 .life-event-image {
     width: 200px;
