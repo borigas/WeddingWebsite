@@ -25,7 +25,8 @@ namespace WeddingWebsite
 
             bundles.Add(new ScriptBundle("~/bundles/jssor").Include(
                       "~/Scripts/jssor.js",
-                      "~/Scripts/jssor.slider.js"));
+                      "~/Scripts/jssor.slider.js",
+                      "~/Scripts/hisrc.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
