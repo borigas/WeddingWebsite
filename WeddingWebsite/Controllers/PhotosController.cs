@@ -19,9 +19,7 @@ namespace WeddingWebsite.Controllers
                 // Randomly, but repeatably, sort the files
                 .OrderBy(fi => fi.Name.GetHashCode());
 
-            // Convert to a virtual path
-            string absoluteRoot = Server.MapPath("~");
-            var photoPaths = photoFiles.Select(fi => fi.FullName.Replace(absoluteRoot, @"\")).ToArray();
+            var photoPaths = photoFiles.Select(fi => fi.Name);
 
             return View(photoPaths);
         }

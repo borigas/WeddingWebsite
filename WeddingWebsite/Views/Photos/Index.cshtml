@@ -60,6 +60,7 @@
             ];
 
             var options = {
+                $HWA: false,
                 $FillMode: 1,                                      //[Optional] The way to fill image in slide, 0 stretch, 1 contain (keep aspect ratio and put all inside slide), 2 cover (keep aspect ratio and cover whole slide), 4 actuall size, default value is 0
                 $AutoPlay: false,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
                 $AutoPlayInterval: 1500,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
@@ -173,8 +174,7 @@
                 {
                     <div>
                         <!-- src2 is used for lazy loading the image -->
-                        <img data-u="image" src2="@imagePath" />
-                        @*<img data-u="thumb" src="@imagePath" />*@
+                        <img data-u="image" src="~/Content/EngagementPhotos/Large/@imagePath" />
                     </div>
                 }
             </div>
