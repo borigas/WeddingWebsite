@@ -124,13 +124,21 @@ textarea {
         opacity: 1;
     }
 
-.home-header{
+.home-header {
     overflow: auto;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-.field-popover{
+#huskers-logo {
+    max-width: 70%;
+}
+
+#tigers-logo {
+    float: right;
+}
+
+.field-popover {
     overflow: auto;
 }
 
@@ -138,7 +146,7 @@ textarea {
     width: 200px;
 }
 
-#stadium-row{
+#stadium-row {
     margin-top: -50px;
 }
 
@@ -425,17 +433,14 @@ textarea {
     margin: -8px; /* -0.5 * baseWidth - baseBorder */
     width: 27px; /*  2 * baseWidth + baseBorder */
     height: 27px;
-
     -webkit-animation: pulsate 1s ease-out;
     -moz-animation: pulsate 1s ease-out;
     -o-animation: pulsate 1s ease-out;
     animation: pulsate 1s ease-out;
-
     -webkit-animation-iteration-count: infinite;
     -moz-animation-iteration-count: infinite;
     -o-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
-
     opacity: 0.0;
 }
 
@@ -457,7 +462,7 @@ textarea {
     }
 }
 
-@-moz-keyframes pulsate{
+@-moz-keyframes pulsate {
     0% {
         -moz-transform: scale(1.0, 1.0);
         transform: scale(1.0, 1.0);
@@ -475,7 +480,7 @@ textarea {
     }
 }
 
-@-o-keyframes pulsate{
+@-o-keyframes pulsate {
     0% {
         -o-transform: scale(1.0, 1.0);
         transform: scale(1.0, 1.0);
