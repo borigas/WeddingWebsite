@@ -12,7 +12,7 @@ namespace WeddingWebsite.Controllers
         // GET: Photos
         public ActionResult Index()
         {
-            var photosPath = Server.MapPath(@"~/Content/EngagementPhotos");
+            var photosPath = Server.MapPath(@"~/Content/EngagementPhotos/Full");
             DirectoryInfo photosDirectory = new DirectoryInfo(photosPath);
 
             var photoFiles = photosDirectory.EnumerateFiles("*.jpg")
