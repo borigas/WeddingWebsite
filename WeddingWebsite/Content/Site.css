@@ -130,6 +130,10 @@ textarea {
     padding-bottom: 20px;
 }
 
+.field-popover{
+    overflow: auto;
+}
+
 .life-event-image {
     width: 200px;
 }
