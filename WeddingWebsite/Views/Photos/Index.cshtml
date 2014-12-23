@@ -174,7 +174,9 @@
                 {
                     <div>
                         <!-- src2 is used for lazy loading the image -->
-                        <img data-u="image" src="~/Content/EngagementPhotos/Large/@imagePath" />
+                        <img class="visible-lg" style="max-width: 100%; max-height: 100%; margin: auto;" data-u="image" src="~/Content/EngagementPhotos/Large/@imagePath" />
+                        <img class="visible-md" style="max-width: 100%; max-height: 100%; margin: auto;" data-u="image" src="~/Content/EngagementPhotos/Medium/@imagePath" />
+                        <img class="visible-sm visible-xs" style="max-width: 100%; max-height: 100%; margin: auto;" data-u="image" src="~/Content/EngagementPhotos/Small/@imagePath" />
                     </div>
                 }
             </div>
