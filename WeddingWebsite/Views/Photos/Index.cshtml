@@ -10,14 +10,6 @@
         $.hisrc.speedTest();
 
         jQuery(document).ready(function ($) {
-
-            $("img.hisrc").hisrc({
-                speedTestUri: '/Content/SpeedTest50K.jpg',
-                speedTestKB: 50,
-                srcIsLowResolution: true
-            });
-
-
             var _SlideshowTransitions = [
             //Fade in L
                 { $Duration: 1200, x: 0.3, $During: { $Left: [0.3, 0.7] }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
@@ -184,15 +176,20 @@
                 @foreach (var pictureModel in Model.PictureModels)
                 {
                     <div>
-                        <!-- src2 is used for lazy loading the image -->
-                        <img data-u="image" src="@pictureModel.DefaultPath"
-                             sizes="100vw"
-                             srcset="@pictureModel.SrcSetPaths" />
-                        @*<img data-u="image" src="~/Content/EngagementPhotos/Small/@imagePath" sizes="100vw"
-                            srcset="/Content/EngagementPhotos/Small/@imagePath 300w, /Content/EngagementPhotos/Medium/@imagePath 600w, /Content/EngagementPhotos/Large/@imagePath 1000w" />*@
-                        @*<img class="hisrc" data-u="image" src="~/Content/EngagementPhotos/Small/@imagePath"
-                            data-1x="/Content/EngagementPhotos/Medium/@imagePath" data-2x="/Content/EngagementPhotos/Large/@imagePath" />*@
-                        @*<img data-u="image" src="~/Content/EngagementPhotos/Medium/@imagePath" />*@
+                        @*<img data-u="image" src="@pictureModel.DefaultPath"
+                            sizes="100vw"
+                            srcset="@pictureModel.SrcSetPaths" />*@
+                        <picture data-u="image" style="height: 100%; width: 100%;">
+                            @foreach (var metadata in pictureModel.PictureMetadatas.OrderBy(p => p.Width))
+                            {
+                                <source style="display: block; margin:auto; max-height: 100%; max-width: 100%;" srcset="@metadata.RelativePath" media="(max-width: @(metadata.Width)px) and (max-height: @(metadata.Height)px)" />
+                            }
+                            <!-- Fall back to smallest image -->
+                            <img style="display: block; margin:auto; max-height: 100%; max-width: 100%;" src="@pictureModel.PictureMetadatas.OrderBy(p => p.Width).First().RelativePath" />
+                        </picture>
+                        <div data-u="thumb">
+                            <img style="display: block; margin:auto; max-height: 100%; max-width: 100%;" src="@pictureModel.PictureMetadatas.OrderBy(p => p.Width).First().RelativePath" />
+                        </div>
                     </div>
                 }
             </div>

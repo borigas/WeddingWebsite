@@ -39,10 +39,12 @@ namespace WeddingWebsite.Models
             using (var image = Image.FromFile(fullPath))
             {
                 Width = image.Width;
+                Height = image.Height;
             }
         }
 
         public float Width { get; set; }
+        public float Height { get; set; }
         public string FullPath { get; set; }
         public string RelativePath { get; set; }
     }
