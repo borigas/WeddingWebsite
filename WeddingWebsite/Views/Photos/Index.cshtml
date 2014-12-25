@@ -1,4 +1,4 @@
-﻿@model IEnumerable<string>
+﻿@model WeddingWebsite.Models.PicturesModel
 @{
     ViewBag.Title = "Photos";
 }
@@ -14,7 +14,7 @@
             $("img.hisrc").hisrc({
                 speedTestUri: '/Content/SpeedTest50K.jpg',
                 speedTestKB: 50,
-                srcIsLowResolution : true
+                srcIsLowResolution: true
             });
 
 
@@ -181,12 +181,17 @@
         <div id="slider_container" style="position: relative; top: 0px; width: 600px; height: 300px; margin:auto;">
             <!-- Slides Container -->
             <div class="slides" data-u="slides" style="position: absolute; overflow: hidden; left: 0px; top: 0px; width: 600px; height: 300px;">
-                @foreach (var imagePath in Model)
+                @foreach (var pictureModel in Model.PictureModels)
                 {
                     <div>
                         <!-- src2 is used for lazy loading the image -->
-                        <img class="hisrc" data-u="image" src="~/Content/EngagementPhotos/Small/@imagePath" 
-                             data-1x="/Content/EngagementPhotos/Medium/@imagePath" data-2x="/Content/EngagementPhotos/Large/@imagePath" />
+                        <img data-u="image" src="@pictureModel.DefaultPath"
+                             sizes="100vw"
+                             srcset="@pictureModel.SrcSetPaths" />
+                        @*<img data-u="image" src="~/Content/EngagementPhotos/Small/@imagePath" sizes="100vw"
+                            srcset="/Content/EngagementPhotos/Small/@imagePath 300w, /Content/EngagementPhotos/Medium/@imagePath 600w, /Content/EngagementPhotos/Large/@imagePath 1000w" />*@
+                        @*<img class="hisrc" data-u="image" src="~/Content/EngagementPhotos/Small/@imagePath"
+                            data-1x="/Content/EngagementPhotos/Medium/@imagePath" data-2x="/Content/EngagementPhotos/Large/@imagePath" />*@
                         @*<img data-u="image" src="~/Content/EngagementPhotos/Medium/@imagePath" />*@
                     </div>
                 }
