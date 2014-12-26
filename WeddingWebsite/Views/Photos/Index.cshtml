@@ -189,7 +189,7 @@
                         <picture data-u="image" style="height: 100%; width: 100%;">
                             @foreach (var metadata in pictureModel.PictureMetadatas.OrderBy(p => p.Width))
                             {
-                                <source style="display: block; margin:auto; max-height: 100%; max-width: 100%;" srcset="@metadata.RelativePath" media="(max-width: @(metadata.Width)px) and (max-height: @(metadata.Height)px)" />
+                                <source style="display: block; margin:auto; max-height: 100%; max-width: 100%;" srcset="@metadata.RelativePath" media="(max-width: @(metadata.Width * 3)px) and (max-height: @(metadata.Height * 3)px)" />
                             }
                             <!-- Fall back to smallest image -->
                             <img style="display: block; margin:auto; max-height: 100%; max-width: 100%;" src="@pictureModel.PictureMetadatas.OrderBy(p => p.Width).First().RelativePath" />
