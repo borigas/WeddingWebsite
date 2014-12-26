@@ -7,6 +7,16 @@
     @Scripts.Render("~/bundles/jssor")
     <script>
         jQuery(document).ready(function ($) {
+
+            // Default the slide dimensions to the initial window dimensions
+            var parent = $("#slider_container").parent();
+            $("#slider_container").height(parent.height());
+            $("#slider_container").width(parent.width());
+            $(".slides").height(parent.height());
+            $(".slides").width(parent.width());
+
+            $(".slide-navigator").width(parent.width());
+
             var _SlideshowTransitions = [
             //Fade in L
                 { $Duration: 1200, x: 0.3, $During: { $Left: [0.3, 0.7] }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
@@ -199,7 +209,7 @@
             </span>
 
             <!-- Thumbnail Navigator Skin #11 Begin -->
-            <div data-u="thumbnavigator" class="jssort11" style="cursor: default; position: absolute; width: 600px; height: 40px; left:0px; bottom: 0px;">
+            <div class="slide-navigator" data-u="thumbnavigator" class="jssort11" style="cursor: default; position: absolute; width: 600px; height: 40px; left:0px; bottom: 0px;">
                 <div style=" background-color: #000; filter:alpha(opacity=30); opacity:.3; width: 100%; height:100%;"></div>
                 <style>
                 </style>
