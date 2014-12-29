@@ -10,12 +10,33 @@ namespace WeddingWebsite.Controllers
 {
     public class PhotosController : Controller
     {
+        private static PicturesModel _model = null;
+        private static object _picturesModelLock = new object();
         // GET: Photos
         public ActionResult Index()
         {
+            if (_model == null)
+            {
+                lock (_picturesModelLock)
+                {
+                    if (_model == null)
+                    {
+                        string webRoot = Server.MapPath("~");
+                        string photosRoot = Server.MapPath(@"~/Content/EngagementPhotos/");
+
+                        _model = CreatePhotosModel(webRoot, photosRoot);
+                    }
+                }
+            }
+
+            return View(_model);
+        }
+
+        private static PicturesModel CreatePhotosModel(string webRoot, string photosRoot)
+        {
             string[] photosSizeFolders = new string[] { "Small", "Medium", "Large", "Full" };
             string searchFolder = photosSizeFolders.First();
-            var photosPath = Server.MapPath(@"~/Content/EngagementPhotos/" + searchFolder);
+            string photosPath = photosRoot + searchFolder;
             DirectoryInfo photosDirectory = new DirectoryInfo(photosPath);
 
 
@@ -23,7 +44,6 @@ namespace WeddingWebsite.Controllers
                 // Randomly, but repeatably, sort the files
                 .OrderBy(fi => fi.Name.GetHashCode());
 
-            string absoluteRoot = Server.MapPath("~");
             //var photoPaths = photoFiles.Select(fi => fi.FullName.Replace(absoluteRoot, @"\")).ToArray();
 
             PicturesModel model = new PicturesModel();
@@ -34,7 +54,7 @@ namespace WeddingWebsite.Controllers
                 var allSizeFullPaths = photosSizeFolders.Select(size => photoFile.FullName.Replace(searchFolder, size));
                 var allSizeMetadatas = allSizeFullPaths.Select(fullPath =>
                 {
-                    var relativePath = fullPath.Replace(absoluteRoot, @"\");
+                    var relativePath = fullPath.Replace(webRoot, @"\");
                     return new PictureMetadata(fullPath, relativePath);
                 });
 
@@ -44,7 +64,7 @@ namespace WeddingWebsite.Controllers
                 });
             }
 
-            return View(model);
+            return model;
         }
     }
 }
