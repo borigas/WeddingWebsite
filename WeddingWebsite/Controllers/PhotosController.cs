@@ -10,7 +10,7 @@ namespace WeddingWebsite.Controllers
 {
     public class PhotosController : Controller
     {
-        private static PicturesModel _model = null;
+        private static string[] _model = null;
         private static object _picturesModelLock = new object();
         // GET: Photos
         public ActionResult Index()
@@ -32,7 +32,7 @@ namespace WeddingWebsite.Controllers
             return View(_model);
         }
 
-        private static PicturesModel CreatePhotosModel(string webRoot, string photosRoot)
+        private static string[] CreatePhotosModel(string webRoot, string photosRoot)
         {
             string[] photosSizeFolders = new string[] { "Small", "Medium", "Large", "Full" };
             string searchFolder = photosSizeFolders.First();
@@ -44,27 +44,7 @@ namespace WeddingWebsite.Controllers
                 // Randomly, but repeatably, sort the files
                 .OrderBy(fi => fi.Name.GetHashCode());
 
-            //var photoPaths = photoFiles.Select(fi => fi.FullName.Replace(absoluteRoot, @"\")).ToArray();
-
-            PicturesModel model = new PicturesModel();
-            model.PictureModels = new List<PictureModel>();
-
-            foreach (var photoFile in photoFiles)
-            {
-                var allSizeFullPaths = photosSizeFolders.Select(size => photoFile.FullName.Replace(searchFolder, size));
-                var allSizeMetadatas = allSizeFullPaths.Select(fullPath =>
-                {
-                    var relativePath = fullPath.Replace(webRoot, @"\");
-                    return new PictureMetadata(fullPath, relativePath);
-                });
-
-                model.PictureModels.Add(new PictureModel()
-                {
-                    PictureMetadatas = allSizeMetadatas.ToList()
-                });
-            }
-
-            return model;
+            return photoFiles.Select(fi => fi.Name).ToArray();
         }
     }
 }

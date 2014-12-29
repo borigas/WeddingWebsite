@@ -1,4 +1,4 @@
-﻿@model WeddingWebsite.Models.PicturesModel
+﻿@model IEnumerable<string>
 @{
     ViewBag.Title = "Photos";
 }
@@ -180,22 +180,18 @@
         <div id="slider_container" style="position: relative; top: 0px; width: 600px; height: 300px; margin:auto;">
             <!-- Slides Container -->
             <div class="slides" data-u="slides" style="position: absolute; overflow: hidden; left: 0px; top: 0px; width: 600px; height: 300px;">
-                @foreach (var pictureModel in Model.PictureModels)
+                @foreach (var pictureName in Model)
                 {
                     <div>
-                        @*<img data-u="image" src="@pictureModel.DefaultPath"
-                            sizes="100vw"
-                            srcset="@pictureModel.SrcSetPaths" />*@
                         <picture data-u="image" style="height: 100%; width: 100%;">
-                            @foreach (var metadata in pictureModel.PictureMetadatas.OrderBy(p => p.Width))
-                            {
-                                <source style="display: block; margin:auto; max-height: 100%; max-width: 100%;" srcset="@metadata.RelativePath" media="(max-width: @(metadata.Width * 3)px) and (max-height: @(metadata.Height * 3)px)" />
-                            }
+                            <source style="display: block; margin:auto; max-height: 100%; max-width: 100%;" srcset="\Content\EngagementPhotos\Large\@pictureName" media="(min-width: 992px)" />
+                            <source style="display: block; margin:auto; max-height: 100%; max-width: 100%;" srcset="\Content\EngagementPhotos\Medium\@pictureName" media="(min-width: 768px)" />
+                            <source style="display: block; margin:auto; max-height: 100%; max-width: 100%;" srcset="\Content\EngagementPhotos\Small\@pictureName" media="(max-width: 768px)" />
                             <!-- Fall back to smallest image -->
-                            <img style="display: block; margin:auto; max-height: 100%; max-width: 100%;" src="@pictureModel.PictureMetadatas.OrderBy(p => p.Width).First().RelativePath" />
+                            <img style="display: block; margin:auto; max-height: 100%; max-width: 100%;" src="\Content\EngagementPhotos\Small\@pictureName" />
                         </picture>
                         <div data-u="thumb">
-                            <img style="display: block; margin:auto; max-height: 100%; max-width: 100%;" src="@pictureModel.PictureMetadatas.OrderBy(p => p.Width).First().RelativePath" />
+                            <img style="display: block; margin:auto; max-height: 100%; max-width: 100%;" src="/Content/EngagementPhotos/Small/@pictureName" />
                         </div>
                     </div>
                 }
